@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function rgbd() {
+export default function Rgbd() {
     return (
         <div>rgbd</div>
     )

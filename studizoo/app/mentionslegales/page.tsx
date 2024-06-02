@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function mentionslegales() {
+export default function Mentionslegales() {
     return (
         <div>mentionslegales</div>
     )
