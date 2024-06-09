@@ -12,7 +12,7 @@ export default function Footer() {
                     <p className="text-sm text-white">
                         Adresse:
                         <br/> 
-                        Avenue du Zoo,
+                        Avenue du Zoo
                         <br/> 
                         35000 Rennes
                     </p>
@@ -27,9 +27,9 @@ export default function Footer() {
                     <p className="text-sm text-white">
                         Jours et heures d'ouverture :
                         <br/> 
-                        Ouvert 7 jours sur 7 de 9h à 18h,
+                        Ouvert 7 jours sur 7 de 9h à 18h
                         <br/> 
-                        Même les jours fériés.
+                        Même les jours fériés
                     </p>
             </div>
             <Separator className="my-4" />
