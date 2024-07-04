@@ -34,7 +34,8 @@ export function Formulaireavis() {
         <Card className='bg-green-800  '>
             <CardHeader>
                 <CardTitle className="text-4xl text-yellow-400 text-center">Laissez-nous un avis</CardTitle>
-                <CardDescription className="text-lg text-white text-center">De même que vous avez pu lire les commentaires de nos clients, n'hésitez pas à laisser le votre!!</CardDescription>
+                <br />
+                <CardDescription className="text-lg text-white text-center">De même que vous avez pu lire les commentaires de nos visiteurs, n'hésitez pas à laisser le votre!!</CardDescription>
             </CardHeader>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
@@ -45,7 +46,7 @@ export function Formulaireavis() {
                         <FormItem>
                         <FormLabel className='text-yellow-400'>Pseudo</FormLabel>
                         <FormControl>
-                            <Input placeholder='Votre pseudo' {...field} />
+                            <Input placeholder='Votre pseudo' {...field} required/>
                         </FormControl>
                         <FormDescription className='text-white'>
                             Entrez votre pseudo
@@ -61,7 +62,7 @@ export function Formulaireavis() {
                         <FormItem>
                             <FormLabel className='text-yellow-400'>Commentaires</FormLabel>
                             <FormControl>
-                                <Textarea placeholder='Vos commentaires' {...field} />
+                                <Textarea placeholder='Vos commentaires' {...field} required/>
                             </FormControl>
                             <FormDescription className='text-white'>
                                 Entrez vos commentaires

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardDescription, CardHeader, CardTitle, CardContent } from './ui/card'
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel'
 import Imagepresentation1 from './imagepresentation1'
 import Imagepresentation2 from './imagepresentation2'
