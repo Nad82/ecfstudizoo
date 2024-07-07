@@ -1,0 +1,16 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@internal/prisma-second/client"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("SECOND_DATABASE_URL")
+}
+
+model stat_animals {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  clic        Int
+  dateCreated DateTime @db.Date
+  prenom      String
+}
