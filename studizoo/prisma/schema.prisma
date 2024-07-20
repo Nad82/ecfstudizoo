@@ -7,139 +7,134 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-datasource db1 {
-  provider = "mongodb"
-  url      = env("DATABASE_URL1")
-}
-
-model accounts {
+model Account {
   id                      Int     @id @default(autoincrement())
   type                    String? @db.VarChar(255)
   provider                String? @db.VarChar(255)
   provider_accountId      String? @db.VarChar(255)
   refresh_token           String? @db.VarChar(255)
   access_token            String? @db.VarChar(255)
-  expireAt                Int?
+  expire_at               Int?
   token_type              String? @db.VarChar(255)
   scope                   String? @db.VarChar(255)
   id_token                String? @db.Text
   session_state           String? @db.VarChar(255)
   refresh_token_expire_in Int?
   user_id                 Int     @unique(map: "user_id")
-  users                   users   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "accounts_ibfk_1")
+  user                    User    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "account_ibfk_1")
 }
 
-model animals {
-  id                     Int                   @id @default(autoincrement())
-  prenom                 String                @db.VarChar(40)
-  race                   String                @db.VarChar(40)
-  habitat                String                @db.VarChar(40)
+model Animal {
+  id                     Int                  @id @default(autoincrement())
+  prenom                 String               @db.VarChar(40)
+  race                   String               @db.VarChar(40)
+  habitat                String               @db.VarChar(40)
   image_animal_id        Int?
   compte_rendu_id        Int?
   consommation_animal_id Int?
-  image_animals          image_animals?        @relation(fields: [image_animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "animals_ibfk_1")
-  compte_rendus          compte_rendus?        @relation(fields: [compte_rendu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "animals_ibfk_2")
-  consommation_animals   consommation_animals? @relation(fields: [consommation_animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "animals_ibfk_3")
+  image_animal           Image_animal?        @relation(fields: [image_animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "animal_ibfk_1")
+  compte_rendu           Compte_rendu?        @relation(fields: [compte_rendu_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "animal_ibfk_2")
+  consommation_animal    Consommation_animal? @relation(fields: [consommation_animal_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "animal_ibfk_3")
 
-  @@index([image_animal_id], map: "image_animal_id")
   @@index([compte_rendu_id], map: "compte_rendu_id")
   @@index([consommation_animal_id], map: "consommation_animal_id")
+  @@index([image_animal_id], map: "image_animal_id")
 }
 
-model avis {
+model Avis {
   id           Int     @id @default(autoincrement())
   pseudo       String  @db.VarChar(40)
   commentaires String  @db.Text
   published    Boolean
 }
 
-model compte_rendus {
-  id                  Int       @id @default(autoincrement())
-  etat                String    @db.VarChar(40)
-  nourriture          String    @db.VarChar(50)
-  grammage_nourriture Int
-  heure_passage       DateTime  @db.DateTime(0)
-  animals             animals[]
+model Compte_rendu {
+  id                  Int      @id @default(autoincrement())
+  etat                String   @db.VarChar(40)
+  nourriture          String   @db.VarChar(50)
+  quantite_nourriture Int
+  heure_passage       DateTime @db.DateTime(0)
+  animal              Animal[]
 }
 
-model consommation_animals {
-  id         Int       @id @default(autoincrement())
-  nourriture String    @db.VarChar(40)
+model Consommation_animal {
+  id         Int      @id @default(autoincrement())
+  nourriture String   @db.VarChar(40)
   quantite   Int
-  date       DateTime  @db.DateTime(0)
-  animals    animals[]
+  heure      DateTime @db.DateTime(0)
+  animal     Animal[]
 }
 
-model etat_habitats {
-  id           Int        @id @default(autoincrement())
-  commentaires String     @db.Text
+model Etat_habitat {
+  id           Int       @id @default(autoincrement())
+  commentaires String    @db.Text
   amelioration Boolean
-  habitats     habitats[]
+  habitat      Habitat[]
 }
 
-model habitats {
+model Habitat {
   id               Int            @id @default(autoincrement())
   nom              String         @db.VarChar(40)
   description      String         @db.Text
-  image_habitat_id Int
-  etat_habitat_id  Int
-  image_habitats   image_habitats @relation(fields: [image_habitat_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "habitats_ibfk_1")
-  etat_habitats    etat_habitats  @relation(fields: [etat_habitat_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "habitats_ibfk_2")
+  image_habitat_id Int?
+  etat_habitat_id  Int?
+  image_habitat    Image_habitat? @relation(fields: [image_habitat_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "habitat_ibfk_1")
+  etat_habitat     Etat_habitat?  @relation(fields: [etat_habitat_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "habitat_ibfk_2")
 
-  @@index([image_habitat_id], map: "image_habitat_id")
   @@index([etat_habitat_id], map: "etat_habitat_id")
+  @@index([image_habitat_id], map: "image_habitat_id")
 }
 
-model image_animals {
+model Image_animal {
+  id     Int      @id @default(autoincrement())
+  nom    String?  @db.VarChar(255)
+  animal Animal[]
+}
+
+model Image_habitat {
   id      Int       @id @default(autoincrement())
   nom     String?   @db.VarChar(255)
-  animals animals[]
+  habitat Habitat[]
 }
 
-model image_habitats {
-  id       Int        @id @default(autoincrement())
-  nom      String?    @db.VarChar(255)
-  habitats habitats[]
+model Role {
+  id   Int     @id @default(autoincrement())
+  nom  String? @db.VarChar(20)
+  user User[]
 }
 
-model roles {
-  id    Int     @id @default(autoincrement())
-  nom   String? @db.VarChar(20)
-  users users[]
-}
-
-model services {
+model Services {
   id          Int    @id @default(autoincrement())
   nom         String @db.VarChar(40)
   description String @db.Text
 }
 
-model session {
+model Session {
   id            Int       @id @default(autoincrement())
   session_token String?   @unique(map: "session_token") @db.VarChar(255)
   expires       DateTime? @db.DateTime(0)
   created_at    DateTime? @db.DateTime(0)
   updated_at    DateTime? @db.DateTime(0)
   user_id       Int       @unique(map: "user_id")
-  users         users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "session_ibfk_1")
+  user          User      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "session_ibfk_1")
 }
 
-model users {
+model User {
   id             Int       @id @default(autoincrement())
-  username       String    @unique(map: "username") @db.VarChar(40)
+  email          String    @unique(map: "email") @db.VarChar(70)
   password       String?   @db.VarChar(20)
   email_verified DateTime? @db.DateTime(0)
   created_at     DateTime? @db.DateTime(0)
   updated_at     DateTime? @db.DateTime(0)
   role_id        Int
-  accounts       accounts?
-  session        session?
-  roles          roles     @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "users_ibfk_1")
+  account        Account?
+  session        Session?
+  role           Role      @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_ibfk_1")
 
   @@index([role_id], map: "role_id")
 }
 
-model verification_token {
+model Verification_token {
   id      Int       @id @default(autoincrement())
   token   String?   @db.VarChar(255)
   expires DateTime? @db.DateTime(0)

@@ -8,9 +8,15 @@ datasource db {
   url      = env("SECOND_DATABASE_URL")
 }
 
-model stat_animals {
+model Stat_animal {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   clic        Int
-  dateCreated DateTime @db.Date
+  date_created DateTime @db.Date
   prenom      String
+}
+
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  email       String
+  password    String
 }
