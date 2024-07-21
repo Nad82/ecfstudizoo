@@ -1,10 +1,13 @@
 import React from 'react'
 import FormContact from '@/components/formContact'
-
+import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export default function Contact() {
 
     return (
+        <div>
+        <Header />
         <div className="bg-green-800">
             <h1 className='text-4xl text-yellow-400 text-center'>Contactez-nous</h1>
             <br />
@@ -14,8 +17,8 @@ export default function Contact() {
             <br />
             <br />
                 <FormContact />
-        
         </div>
-
+        <Footer />
+        </div>
     )
 }

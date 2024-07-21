@@ -1,7 +1,11 @@
+import Footer from '@/components/footer'
+import Header from '@/components/header'
 import React from 'react'
 
 export default function Rgbd() {
     return (
+        <div>
+        <Header />
         <div className="bg-green-800">
             <h1 className='text-4xl text-yellow-400 text-center'> Politique de confidentialité</h1>
             <br />
@@ -134,6 +138,8 @@ export default function Rgbd() {
                 La présente politique de confidentialité peut être consultée à tout moment sur le site www.zooArcadia.com. Nous nous réservons le droit de la modifier ou de la compléter à tout moment.
             </p>
             <br />
+        </div>
+        <Footer />
         </div>
     )
 }

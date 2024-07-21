@@ -1,8 +1,12 @@
 import CarrouselServices from '@/components/carrousel-services'
+import Footer from '@/components/footer'
+import Header from '@/components/header'
 import React from 'react'
 
 export default function Services() {
     return (
+        <div>
+        <Header />
         <div className='bg-green-800 justify-items-center'>
             <div className='text-4xl text-yellow-400 text-center'>Les services</div>
             <br />
@@ -23,6 +27,8 @@ export default function Services() {
                 <li>Visite des habitats avec un guide</li>
                 <li>Visite du zoo en petit train</li>
             </ul>
+        </div>
+        <Footer />
         </div>
     )
 }

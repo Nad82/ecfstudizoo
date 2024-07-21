@@ -1,7 +1,11 @@
+import Footer from '@/components/footer'
+import Header from '@/components/header'
 import React from 'react'
 
 export default function Cgu() {
     return (
+        <div>
+        <Header />
         <div className='bg-green-800'>
             <h1 className='text-4xl text-yellow-400 text-center'>Conditions générales d'utilisation du site du zoo Arcadia</h1>
             <br />
@@ -141,6 +145,8 @@ export default function Cgu() {
                 Pour toute question relative à l’application des présentes CGU, vous pouvez joindre l’éditeur aux coordonnées inscrites à l’Article 1.
             </p>
             <br />
+        </div>
+        <Footer />
         </div>
     )
 }
