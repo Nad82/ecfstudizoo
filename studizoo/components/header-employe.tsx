@@ -23,35 +23,35 @@ export default function HeaderE() {
                     <SheetContent side='left' className='sm:max-w-xs'>
                         <nav className="grid gap-6 text-lg font-medium">
                             <Link 
-                            href='/administrateur'
+                            href='/employe'
                             className='group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base'
                             >
                                 <Turtle className="h-5 w-5 transition-all group-hover:scale-110"/>
                                 <span className="sr-only"> Espace Employé</span>
                             </Link>
                             <Link
-                            href="/administrateur"
+                            href="/employe"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Home className='h-5 w-5'/>
                                 <span className='sr-only'>Home</span>
                             </Link>
                             <Link
-                            href="/api/servicess"
+                            href="employe/employeServices"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Telescope className='h-5 w-5'/>
                                 <span className='sr-only'>Services</span>
                             </Link>
                             <Link
-                            href="/api/avis"
+                            href="employe/employeAvis"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <NotebookText className='h-5 w-5'/>
                                 <span className='sr-only'>Avis</span>
                             </Link>
                             <Link
-                            href="/api/consommation_animal"
+                            href="employe/employeConsommationAnimal"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Salad className='h-5 w-5'/>
@@ -85,19 +85,19 @@ export default function HeaderE() {
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/servicess'>Services</Link>
+                            <Link href='employe/employeServices'>Services</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/avis'>Avis</Link>
+                            <Link href='employe/employeAvis'>Avis</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/consommation_animal'>Consommation Nourriture Animaux</Link>
+                            <Link href='employe/employeConsommationAnimal'>Consommation Nourriture Animaux</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     </BreadcrumbList>

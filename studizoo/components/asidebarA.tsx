@@ -34,7 +34,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/servicess'
+                            href='administrateur/adminServices'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <Telescope className='h-5 w-5'/>
@@ -50,7 +50,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/habitats'
+                            href='administrateur/adminHabitats'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <TreePalm className='h-5 w-5'/>
@@ -66,7 +66,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/animal'
+                            href='administrateur/adminAnimal'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <PawPrint className='h-5 w-5'/>
@@ -82,7 +82,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/compte_rendu'
+                            href='administrateur/adminCompteRendus'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <FileCheck className='h-5 w-5'/>
@@ -98,7 +98,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/stat_animal'
+                            href='administrateur/adminStatAnimal'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <BarChartBig className='h-5 w-5'/>
@@ -114,7 +114,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/employe'
+                            href='administrateur/adminEmploye'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <User className='h-5 w-5'/>
@@ -130,7 +130,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/horaires'
+                            href='administrateur/adminHoraires'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <Clock3 className='h-5 w-5'/>
@@ -148,7 +148,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='/setting'
+                            href='administrateur/settings'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <Settings className='h-5 w-5'/>

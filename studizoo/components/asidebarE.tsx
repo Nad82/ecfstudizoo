@@ -34,7 +34,7 @@ export default function AsidebarE() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/servicess'
+                            href='employe/employeServices'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <Telescope className='h-5 w-5'/>
@@ -50,7 +50,7 @@ export default function AsidebarE() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/avis'
+                            href='employe/employeAvis'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <NotebookText className='h-5 w-5'/>
@@ -66,7 +66,7 @@ export default function AsidebarE() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/consommation_animal'
+                            href='employe/employeConsommationAnimal'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <Salad className='h-5 w-5'/>

@@ -34,7 +34,7 @@ export default function AsidebarV() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/compte_rendu'
+                            href='veterinaire/vetoCompteRendus'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <FileCheck className='h-5 w-5'/>
@@ -50,7 +50,7 @@ export default function AsidebarV() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/etat_habitat'
+                            href='veterinaire/vetoEtatHabitat'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <PaintRoller className='h-5 w-5'/>
@@ -66,7 +66,7 @@ export default function AsidebarV() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='api/consommation_animal'
+                            href='veterinaire/vetoConsommationAnimal'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <Salad className='h-5 w-5'/>

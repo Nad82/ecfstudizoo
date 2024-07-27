@@ -37,21 +37,21 @@ export default function HeaderV() {
                                 <span className='sr-only'>Home</span>
                             </Link>
                             <Link
-                            href="/api/compte_rendu"
+                            href="veterinaire/vetoCompteRendus"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <FileCheck className='h-5 w-5'/>
                                 <span className='sr-only'>Compte Rendus</span>
                             </Link>
                             <Link
-                            href="/api/etat_habitat"
+                            href="veterinaire/vetoEtatHabitat"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <PaintRoller className='h-5 w-5'/>
                                 <span className='sr-only'>Etat habitat</span>
                             </Link>
                             <Link
-                            href="/api/consommation_animal"
+                            href="veterinaire/vetoConsommationAnimal"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Salad className='h-5 w-5'/>
@@ -85,19 +85,19 @@ export default function HeaderV() {
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/compte_rendu'>Compte Rendus</Link>
+                            <Link href='/veterinaire/vetoCompteRendus'>Compte Rendus</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/etat_habitat'>Etat Habitat</Link>
+                            <Link href='/veterinaire/vetoEtatHabitat'>Etat Habitat</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/consommation_animal'>Consommation Nourriture Animaux</Link>
+                            <Link href='/veterinaire/vetoConsommationAnimal'>Consommation Nourriture Animaux</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     </BreadcrumbList>

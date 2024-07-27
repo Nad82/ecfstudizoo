@@ -9,14 +9,14 @@ datasource db {
 }
 
 model Stat_animal {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  clic        Int
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  clic         Int
   date_created DateTime @db.Date
-  prenom      String
+  prenom       String
 }
 
 model User {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  email       String
-  password    String
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String
+  password String
 }

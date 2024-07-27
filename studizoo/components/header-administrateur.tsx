@@ -37,49 +37,49 @@ export default function HeaderA() {
                                 <span className='sr-only'>Home</span>
                             </Link>
                             <Link
-                            href="/api/servicess"
+                            href="administrateur/adminServices"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Telescope className='h-5 w-5'/>
                                 <span className='sr-only'>Services</span>
                             </Link>
                             <Link
-                            href="/api/habitats"
+                            href="administrateur/adminHabitats"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <TreePalm className='h-5 w-5'/>
                                 <span className='sr-only'>Habitats</span>
                             </Link>
                             <Link
-                            href="/api/user"
+                            href="administrateur/adminEmploye"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <User className='h-5 w-5'/>
                                 <span className='sr-only'>Employés</span>
                             </Link>
                             <Link
-                            href="/api/stat_animal"
+                            href="administrateur/adminStatAnimal"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <BarChartBig className='h-5 w-5'/>
                                 <span className='sr-only'>Statistiques Animaux</span>
                             </Link>
                             <Link
-                            href="/api/compte_rendu"
+                            href="administrateur/adminCompteRendus"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <FileCheck className='h-5 w-5'/>
                                 <span className='sr-only'>Compte Rendus</span>
                             </Link>
                             <Link
-                            href="/api/animal"
+                            href="administrateur/adminAnimal"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <PawPrint className='h-5 w-5'/>
                                 <span className='sr-only'>Animaux</span>
                             </Link>
                             <Link
-                            href="/api/horaires"
+                            href="administrateur/adminHoraires"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Clock3 className='h-5 w-5'/>
@@ -91,7 +91,7 @@ export default function HeaderA() {
                                 <Tooltip>
                                     <TooltipTrigger asChild>
                                     <Link
-                                    href="/settings"
+                                    href="administrateur/settings"
                                     className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                                     >
                                         <Settings className='h-5 w-5'/>
@@ -113,43 +113,43 @@ export default function HeaderA() {
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/servicess'>Services</Link>
+                            <Link href='administrateur/adminServices'>Services</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/habitats'>Habitats</Link>
+                            <Link href='administrateur/adminHabitats'>Habitats</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/user'>Employés</Link>
+                            <Link href='administrateur/adminEmploye'>Employés</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/stat_animal'>Statistiques Animaux</Link>
+                            <Link href='administrateur/adminStatAnimal'>Statistiques Animaux</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/compte_rendu'>Compte Rendus</Link>
+                            <Link href='administrateur/adminCompteRendus'>Compte Rendus</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/animal'>Animaux</Link>
+                            <Link href='administrateur/adminAnimal'>Animaux</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='/api/horaires'>Horaires</Link>
+                            <Link href='administrateur/adminHoraires'>Horaires</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     </BreadcrumbList>
