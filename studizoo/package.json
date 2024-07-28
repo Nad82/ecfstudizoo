@@ -6,10 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint", 
+    "lint": "next lint",
     "mongo:generate": "npx prisma generate --schema prisma-second/schema.prisma",
     "mongo:dbpush": "npx prisma db push --schema prisma-second/schema.prisma"
-
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.1",

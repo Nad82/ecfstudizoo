@@ -1,8 +1,8 @@
 import { db} from "@/lib/db";
 
-export const getAllAnimalsFromDb = async () => {
-    const animals = await db.animal.findMany();
-
+export const getAllAnimalFromDb = async () => {
+    const animal = await db.animal.findMany()
+    return animal
 }
 
 export const getAnimalFromDb = async (id: number) => {
@@ -14,18 +14,17 @@ export const getAnimalFromDb = async (id: number) => {
     return animal || null
 }
 
-export const createAnimalInDb = async (prenom: string, race: string, habitat: string) => {
+export const createAnimalInDb = async (prenom: string, race: string) => {
     const animal = await db.animal.create({
         data: {
             prenom: prenom,
             race:race,
-            habitat: habitat
         }
     })
     return animal
 }
 
-export const updateAnimalInDb = async (id: number, prenom: string, race: string, habitat: string) => {
+export const updateAnimalInDb = async (id: number, prenom: string, race: string) => {
     const animal = await db.animal.update({
         where: {
             id: id
@@ -33,7 +32,6 @@ export const updateAnimalInDb = async (id: number, prenom: string, race: string,
         data: {
             prenom: prenom,
             race: race,
-            habitat:habitat
         }
     })
     return animal
