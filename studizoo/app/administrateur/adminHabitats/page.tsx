@@ -1,33 +1,37 @@
 
 import { columns } from "@/components/columns/columnsHabitat";
 import { DataTable } from "@/components/data-table";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import HeaderA from "@/components/header-administrateur";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getAllHabitatFromDb } from "@/app/api/habitat/route";
+import { Plus, Undo2 } from "lucide-react";
 
 
 export default async function AdminHabitats() {
-    const user = await getAllHabitatFromDb();
+    const habitat = await getAllHabitatFromDb();
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
-            <HeaderA/>
             <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-                <Card x-chunk="adminEmploye">
+                <Card x-chunk="adminEmploye" className="bg-green-800">
                     <CardHeader>
-                        <CardTitle>Habitats</CardTitle>
-                        <CardDescription>
-                            Les habitats du Zoo Arcadia
+                        <CardTitle className="text-4xl text-yellow-400 text-center">Les habitats du zoo Arcadia</CardTitle>
+                        <CardDescription className="text-lg text-white" >
+                            L'espace administrateur vous permet de gérer les habitats du zoo Arcadia: Créer, modifier ou supprimer les habitats.
                         </CardDescription>
-                        <Link href="/administrateur/adminHabitat/create">
-                            <Button variant="outline">Créer un habitat</Button>
+                        <Link href="/administrateur/adminHabitats/create">
+                            <Button><Plus/>Créer un habitat</Button>
                         </Link>
                     </CardHeader>
-                    <CardContent>
-                        <DataTable columns={columns} data={user!} />
+                    <CardContent className=" text-white">
+                        <DataTable columns={columns} data={habitat!} />
                     </CardContent>
+                    <CardFooter>
+                        <Link href="/administrateur">
+                            <Button><Undo2/>Retour</Button>
+                        </Link>
+                    </CardFooter>
                 </Card>
             </main>
         </div>

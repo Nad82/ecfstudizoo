@@ -76,7 +76,7 @@ export default function HeaderV() {
                     </SheetContent>
                 </Sheet>
                 <Breadcrumb className='hidden md:flex'>
-                    <BreadcrumbList>
+                    <BreadcrumbList className='text-white'>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
                             <Link href='/veterinaire'>Espace Vétérinaire</Link>

@@ -5,6 +5,10 @@ import { Button } from "../ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import Link from "next/link"
+import { Switch } from "../ui/switch"
+import { updateAvisInDb } from "@/app/api/avis/route"
+import { avisSchema } from "@/lib/zod"
+import { z } from "zod"
 
 export type Avis ={
     id: number,
@@ -28,8 +32,33 @@ export const columns: ColumnDef<Avis>[] = [
     },
     {
         header: 'Published',
-        accessorKey: 'published'
+        accessorKey: 'published',
+        cell: ({row}) => {
+            const avis = row.original;
+
+            const handleSwitchChange = (checked:boolean) => {
+                const updateAvis = {
+                    ...avis,
+                    published: checked
+                };
+                handleSubmit(updateAvis);
+            };
+
+            const handleSubmit = (data:z.infer<typeof avisSchema> ) => {
+                updateAvisInDb(avis.id, data)
+            }
+            return (
+                <form>
+                    <Switch 
+                        id="published"
+                        onCheckedChange={handleSwitchChange}
+                        checked={avis.published}
+                    />
+                </form>
+            )
+        }
     },
+
     {
         header: 'Actions',
         accessorKey: 'actions',
@@ -45,12 +74,8 @@ export const columns: ColumnDef<Avis>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Détails</DropdownMenuItem>
-                        <Link href={`/administrateur/adminAvis/edit/${avis.id}`}>
-                            <DropdownMenuItem>Modifier</DropdownMenuItem>
-                        </Link>
-                        <Link href={`/administrateur/adminAvis/delete/${avis.id}`}>
-                            <DropdownMenuItem>Supprimer</DropdownMenuItem>
+                        <Link href={`/employe/employeAvis/${avis.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>
                 </DropdownMenu>

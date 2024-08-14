@@ -2,7 +2,7 @@ import React from 'react'
 import Link  from 'next/link'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
 import { Button } from './ui/button'
-import { BarChartBig, Clock3, FileCheck, Home, PanelLeft, PawPrint, Search, Settings, Telescope, TreePalm, Turtle, User } from 'lucide-react'
+import { BarChartBig, Clock3, FileCheck, FileImage, Home, Image, PanelLeft, PawPrint, Search, Settings, Telescope, TreePalm, Turtle, User } from 'lucide-react'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from './ui/breadcrumb'
 import { Input } from './ui/input'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger,DropdownMenuLabel } from './ui/dropdown-menu'
@@ -22,54 +22,12 @@ export default function HeaderA() {
                     </SheetTrigger>
                     <SheetContent side='left' className='sm:max-w-xs'>
                         <nav className="grid gap-6 text-lg font-medium">
-                            <Link 
-                            href='/administrateur'
-                            className='group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base'
-                            >
-                                <Turtle className="h-5 w-5 transition-all group-hover:scale-110"/>
-                                <span className="sr-only"> Espace Administrateur</span>
-                            </Link>
                             <Link
                             href="/administrateur"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Home className='h-5 w-5'/>
                                 <span className='sr-only'>Home</span>
-                            </Link>
-                            <Link
-                            href="administrateur/adminServices"
-                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
-                            >
-                                <Telescope className='h-5 w-5'/>
-                                <span className='sr-only'>Services</span>
-                            </Link>
-                            <Link
-                            href="administrateur/adminHabitats"
-                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
-                            >
-                                <TreePalm className='h-5 w-5'/>
-                                <span className='sr-only'>Habitats</span>
-                            </Link>
-                            <Link
-                            href="administrateur/adminEmploye"
-                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
-                            >
-                                <User className='h-5 w-5'/>
-                                <span className='sr-only'>Employés</span>
-                            </Link>
-                            <Link
-                            href="administrateur/adminStatAnimal"
-                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
-                            >
-                                <BarChartBig className='h-5 w-5'/>
-                                <span className='sr-only'>Statistiques Animaux</span>
-                            </Link>
-                            <Link
-                            href="administrateur/adminCompteRendus"
-                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
-                            >
-                                <FileCheck className='h-5 w-5'/>
-                                <span className='sr-only'>Compte Rendus</span>
                             </Link>
                             <Link
                             href="administrateur/adminAnimal"
@@ -79,11 +37,60 @@ export default function HeaderA() {
                                 <span className='sr-only'>Animaux</span>
                             </Link>
                             <Link
+                            href="administrateur/adminCompteRendus"
+                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                            >
+                                <FileCheck className='h-5 w-5'/>
+                                <span className='sr-only'>Compte Rendus</span>
+                            </Link>
+                            <Link
+                            href="administrateur/adminEmploye"
+                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                            >
+                                <User className='h-5 w-5'/>
+                                <span className='sr-only'>Employés</span>
+                            </Link>
+                            <Link
+                            href="administrateur/adminHabitats"
+                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                            >
+                                <TreePalm className='h-5 w-5'/>
+                                <span className='sr-only'>Habitats</span>
+                            </Link>
+                            <Link
                             href="administrateur/adminHoraires"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <Clock3 className='h-5 w-5'/>
                                 <span className='sr-only'>Horaires</span>
+                            </Link>
+                            <Link
+                            href="administrateur/adminImageAnimal"
+                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                            >
+                                <FileImage className='h-5 w-5'/>
+                                <span className='sr-only'>Images Animaux</span>
+                            </Link>
+                            <Link
+                            href="administrateur/adminImageHabitat"
+                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                            >
+                                <Image className='h-5 w-5'/>
+                                <span className='sr-only'>Images Habitats</span>
+                            </Link>
+                            <Link
+                            href="administrateur/adminServices"
+                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                            >
+                                <Telescope className='h-5 w-5'/>
+                                <span className='sr-only'>Services</span>
+                            </Link>
+                            <Link
+                            href="administrateur/adminStatAnimal"
+                            className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
+                            >
+                                <BarChartBig className='h-5 w-5'/>
+                                <span className='sr-only'>Statistiques Animaux</span>
                             </Link>
                         </nav>
                         <nav className="mt-auto flex flex-col items-center gap-4 px-2 py-4">
@@ -104,40 +111,10 @@ export default function HeaderA() {
                     </SheetContent>
                 </Sheet>
                 <Breadcrumb className='hidden md:flex'>
-                    <BreadcrumbList>
+                    <BreadcrumbList className='text-white'>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
                             <Link href='/administrateur'>Espace Administrateur</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href='administrateur/adminServices'>Services</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href='administrateur/adminHabitats'>Habitats</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href='administrateur/adminEmploye'>Employés</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href='administrateur/adminStatAnimal'>Statistiques Animaux</Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link href='administrateur/adminCompteRendus'>Compte Rendus</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
@@ -149,7 +126,49 @@ export default function HeaderA() {
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
+                            <Link href='administrateur/adminCompteRendus'>Compte Rendus</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator/>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href='administrateur/adminEmploye'>Employés</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator/>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href='administrateur/adminHabitats'>Habitats</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator/>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
                             <Link href='administrateur/adminHoraires'>Horaires</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator/>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href='administrateur/adminImageAnimal'>Images Animaux</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator/>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href='administrateur/adminImageHabitat'>Images Habitats</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator/>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href='administrateur/adminServices'>Services</Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator/>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link href='administrateur/adminStatAnimal'>Statistiques Animaux</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     </BreadcrumbList>

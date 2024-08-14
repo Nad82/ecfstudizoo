@@ -8,14 +8,6 @@ export const db =
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db
 
-export const getUserFromDb = async (email: string, password: string) => {
-	const user = await db.user.findFirst({
-		where: {
-			email: email,
-			password: password
-		}
-	})
-	return user || null
-}
+
 
 

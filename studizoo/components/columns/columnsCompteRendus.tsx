@@ -36,6 +36,10 @@ export const columns: ColumnDef<CompteRendus>[] = [
         accessorKey: 'heure_passage'
     },
     {
+        header: 'Animal',
+        accessorKey: 'animal'
+    },
+    {
         header: 'Actions',
         accessorKey: 'actions',
         cell: ({row}) => {
@@ -50,11 +54,13 @@ export const columns: ColumnDef<CompteRendus>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Détails</DropdownMenuItem>
-                        <Link href={`/administrateur/adminCompteRendus/edit/${compteRendus.id}`}>
+                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendus.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendus.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/administrateur/adminCompteRendus/delete/${compteRendus.id}`}>
+                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendus.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>

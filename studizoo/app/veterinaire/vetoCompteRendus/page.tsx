@@ -1,10 +1,10 @@
 import { columns } from "@/components/columns/columnsCompteRendus";
 import { DataTable } from "@/components/data-table";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getAllCompteRenduFromDb } from "@/app/api/compte_rendu/route";
-import HeaderV from "@/components/header-veterinaire";
+import { Plus, Undo2 } from "lucide-react";
 
 
 export default async function VetoCompteRendus() {
@@ -12,21 +12,28 @@ export default async function VetoCompteRendus() {
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
-            <HeaderV/>
             <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-                <Card x-chunk="vetoCompteRendu">
+                <Card x-chunk="vetoCompteRendu" className="bg-green-800">
                     <CardHeader>
-                        <CardTitle>Compte Rendus</CardTitle>
-                        <CardDescription>
-                            Les compte-rendus du Zoo Arcadia
+                        <CardTitle className="text-4xl text-yellow-400 text-center">Les compte Rendus du zoo Arcadia</CardTitle>
+                        <br />
+                        <CardDescription className="text-lg text-white">
+                            L'espace vétérinaire vous permet de gérer les compte-rendus du zoo Arcadia: les consulter, les modifier, les supprimer ou en créer de nouveaux.
                         </CardDescription>
+                        <br />
                         <Link href="/veterinaire/vetoCompteRendus/create">
-                            <Button variant="outline">Créer un compte-rendu</Button>
+                            <Button><Plus/>Créer un compte-rendu</Button>
                         </Link>
+                        <br />
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="text-white">
                         <DataTable columns={columns} data={compteRendus!} />
                     </CardContent>
+                    <CardFooter>
+                        <Link href="/veterinaire">
+                            <Button><Undo2/>Retour</Button>
+                        </Link>
+                    </CardFooter>
                 </Card>
             </main>
         </div>

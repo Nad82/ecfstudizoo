@@ -26,30 +26,37 @@ export const columns: ColumnDef<EtatHabitat>[] = [
         accessorKey: 'amelioration',
     },
     {
+        header: 'Habitat',
+        accessorKey: 'habitat',
+    },
+    {
         header: 'Actions',
         accessorKey: 'actions',
-        cell: ({ row }) => {
+        cell: ({row}) => {
+            const etatHabitat = row.original
             return (
                 <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        <Button size="icon" variant="outline">
-                            <MoreHorizontal className="h-5 w-5"/>
+                    <DropdownMenuTrigger asChild>
+                        <Button aria-haspopup='true' variant='ghost' size='icon'>
+                            <MoreHorizontal className="h-4 w-4"/>
+                            <span className="sr-only">Menu</span>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem>
-                            <Link href={`/veterinaire/vetoEtatHabitat/${row.original.id}`}>
-                                <a>Modifier</a>
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Link href={`/veterinaire/vetoEtatHabitat/${row.original.id}`}>
-                                <a>Supprimer</a>
-                            </Link>
-                        </DropdownMenuItem>
+                    <DropdownMenuContent align='end'>
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <Link href={`/veterinaire/vetoEtatHabitat/${etatHabitat.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/veterinaire/vetoEtatHabitat/${etatHabitat.id}/edit`}>
+                            <DropdownMenuItem>Modifier</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/veterinaire/vetoEtatHabitat/${etatHabitat.id}/delete`}>
+                            <DropdownMenuItem>Supprimer</DropdownMenuItem>
+                        </Link>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
         }
     }
+
 ]

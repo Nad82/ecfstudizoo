@@ -40,11 +40,13 @@ export const columns: ColumnDef<Services>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Détails</DropdownMenuItem>
-                        <Link href={`/administrateur/adminServices/edit/${services.id}`}>
+                        <Link href={`/administrateur/adminServices/${services.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminServices/${services.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/administrateur/adminServices/delete/${services.id}`}>
+                        <Link href={`/administrateur/adminServices/${services.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>

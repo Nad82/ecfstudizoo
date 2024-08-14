@@ -35,11 +35,13 @@ export const columns: ColumnDef<Horaires>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Détails</DropdownMenuItem>
-                        <Link href={`/administrateur/adminHoraires/edit/${horaires.id}`}>
+                        <Link href={`/administrateur/adminHoraires/${horaires.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminHoraires/${horaires.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/administrateur/adminHoraires/delete/${horaires.id}`}>
+                        <Link href={`/administrateur/adminHoraires/${horaires.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>

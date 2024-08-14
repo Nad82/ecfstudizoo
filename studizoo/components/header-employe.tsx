@@ -76,7 +76,7 @@ export default function HeaderE() {
                     </SheetContent>
                 </Sheet>
                 <Breadcrumb className='hidden md:flex'>
-                    <BreadcrumbList>
+                    <BreadcrumbList className='text-white'>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
                             <Link href='/employe'>Espace Employé</Link>

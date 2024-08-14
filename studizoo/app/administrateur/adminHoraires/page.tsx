@@ -2,10 +2,10 @@
 import { getAllHorairesFromDb } from "@/app/api/horaires/route";
 import { columns } from "@/components/columns/columnsHoraires";
 import { DataTable } from "@/components/data-table";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import HeaderA from "@/components/header-administrateur";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Plus, Undo2 } from "lucide-react";
 
 
 export default async function AdminHoraires() {
@@ -13,21 +13,27 @@ export default async function AdminHoraires() {
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
-            <HeaderA/>
-            <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-                <Card x-chunk="adminHoraires">
+            <main className="grid flex-1 items-center gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 ">
+                <Card x-chunk="adminHoraires" className="bg-green-800">
                     <CardHeader>
-                        <CardTitle>Horaires</CardTitle>
-                        <CardDescription>
-                            Les horaires du Zoo Arcadia
+                        <CardTitle className="text-4xl text-yellow-400 text-center">Les horaires du zoo Arcadia</CardTitle>
+                        <br />
+                        <CardDescription className="text-lg text-white">
+                            L'espace administrateur vous permet de gérer les horaires du zoo Arcadia: Créer, modifier ou supprimer les horaires.
                         </CardDescription>
+                        <br />
                         <Link href="/administrateur/adminHoraires/create">
-                            <Button variant="outline">Créer des horaires</Button>
+                            <Button><Plus/>Créer des horaires</Button>
                         </Link>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className=" text-white">
                         <DataTable columns={columns} data={horaires!} />
                     </CardContent>
+                    <CardFooter>
+                        <Link href="/administrateur">
+                            <Button> <Undo2 />Retour</Button>
+                        </Link>
+                    </CardFooter>
                 </Card>
             </main>
         </div>

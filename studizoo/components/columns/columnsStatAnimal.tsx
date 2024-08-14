@@ -45,11 +45,13 @@ export const columns: ColumnDef<AnimalStat>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Détails</DropdownMenuItem>
-                        <Link href={`/administrateur/adminAnimalStat/edit/${animalStat.id}`}>
+                        <Link href={`/administrateur/adminStatAnimal/${animalStat.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminStatAnimal/${animalStat.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/administrateur/adminAnimalStat/delete/${animalStat.id}`}>
+                        <Link href={`/administrateur/adminStatAnimal/${animalStat.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>

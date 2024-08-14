@@ -18,7 +18,10 @@ export const userSchema = object({
         .min(1, "Le mot de passe est requis")
         .min(8, "Le mot de passe doit contenir au moins 8 caractères")
         .max(32, "Le mot de passe doit contenir au maximum 32 caractères"),
-    role: string({ required_error: "Le rôle est requis" })
+    email_verified: date({ required_error: "L'email_verified est requis" }),
+    created_at: date({ required_error: "Le created_at est requis" }),
+    updated_at: date({ required_error: "Le updated_at est requis" }),
+    role_id: number({ required_error: "Le role_id est requis" }),
 })
 
 export const animalSchema = object({
@@ -28,9 +31,16 @@ export const animalSchema = object({
     race : string({ required_error: "La race est requise"})
         .min(1, "La race est requise")
         .max(32,"La race doit contenir au maximum 32 caractères"),
-    habitat: string({ required_error: "L'habitat est requis" })
-        .min(1, "L'habitat est requis")
-        .max(32, "L'habitat doit contenir au maximum 32 caractères")
+})
+
+export const avisSchema = object({
+    pseudo: string({ required_error: "Le pseudo est requis" })
+        .min(1, "Le pseudo est requis")
+        .max(32, "Le pseudo doit contenir au maximum 32 caractères"),
+    commentaires: string({ required_error: "Le commentaire est requis" })
+        .min(1, "Le commentaire est requis")
+        .max(255, "Le commentaire doit contenir au maximum 255 caractères"),
+    published: boolean({ required_error: "La publication est requise" })
 })
 
 export const compte_renduSchema = object ({
@@ -52,7 +62,7 @@ export const horairesSchema = object({
 })
 
 export const roleSchema = object({
-    description: string({ required_error: "La description est requise" })
+    nom: string({ required_error: "La description est requise" })
         .min(1, "La description est requise")
         .max(255, "La description doit contenir au maximum 255 caractères")
 })
@@ -88,4 +98,24 @@ export const servicesSchema = object ({
     description: string({ required_error: "La description est requise" })
         .min(1, "La description est requise")
         .max(255, "La description doit contenir au maximum 255 caractères")
+})
+
+export const image_animalSchema = object ({
+    nom: string({ required_error: "Le nom est requis" })
+        .min(1, "Le nom est requis")
+        .max(255, "Le nom doit contenir au maximum 255 caractères")
+})
+
+export const image_habitatSchema = object ({
+    nom: string({ required_error: "Le nom est requis" })
+        .min(1, "Le nom est requis")
+        .max(255, "Le nom doit contenir au maximum 255 caractères")
+})
+
+export const stat_animalSchema = object ({
+    clic: number({ required_error: "Le clic est requis" }),
+    date_created: date({ required_error: "La date de création est requise" }),
+    prenom: string({ required_error: "Le prénom est requis" })
+        .min(1, "Le prénom est requis")
+        .max(255, "Le prénom doit contenir au maximum 255 caractères")
 })

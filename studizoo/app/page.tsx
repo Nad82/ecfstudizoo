@@ -9,21 +9,23 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 
 
+
+
 export default function Home() {
   return (
     <div>
       <Header />
-      <Videohome />
-      <br/>
-      <Aproposhome />
-      <br />
-      <Serviceshome />
-      <br />
-      <Habitatshome />
-      <br />
-      <Temoignagehome />
-      <br />
-      <Formulaireavis />
+        <Videohome />
+        <br/>
+        <Aproposhome />
+        <br />
+        <Serviceshome />
+        <br />
+        <Habitatshome />
+        <br />
+        <Temoignagehome />
+        <br />
+        <Formulaireavis />
       <Footer/>
     </div>
   )

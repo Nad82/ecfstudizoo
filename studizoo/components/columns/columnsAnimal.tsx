@@ -10,6 +10,10 @@ export type Animal ={
     id: number,
     prenom:string,
     race: string,
+    habitat_id: number|null,
+    image_animal_id: number|null,
+    compte_rendu_id: number|null,
+    consommation_animal_id: number|null
 }
 
 export const columns: ColumnDef<Animal>[] = [
@@ -26,10 +30,32 @@ export const columns: ColumnDef<Animal>[] = [
         accessorKey: "race",
     },
     {
+        header: "Habitat",
+        accessorKey: "habitat_id",
+    },
+    {
+        header: "Image",
+        accessorKey: "image_animal_id",
+        cell: ({row}) => {
+            const animal = row.original
+            return (
+                <img src={animal.image_animal_id ? `http://localhost:3000/api/animal/${animal.image_animal_id}/image` : '/images/no-image.png'} alt={animal.prenom} className="h-12 w-12 object-cover rounded-full"/>
+            )
+        }
+    },
+    {
+        header: "Compte rendu",
+        accessorKey: "compte_rendu_id",
+    },
+    {
+        header: "Consommation",
+        accessorKey: "consommation_animal_id",
+    },
+    {
         header: 'Actions',
         accessorKey: 'actions',
         cell: ({row}) => {
-            const avis = row.original
+            const animal = row.original
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -40,11 +66,13 @@ export const columns: ColumnDef<Animal>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Détails</DropdownMenuItem>
-                        <Link href={`/administrateur/adminAnimal/edit/${avis.id}`}>
+                        <Link href={`/administrateur/adminAnimal/${animal.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminAnimal/${animal.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/administrateur/adminAnimal/delete/${avis.id}`}>
+                        <Link href={`/administrateur/adminAnimal/${animal.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>

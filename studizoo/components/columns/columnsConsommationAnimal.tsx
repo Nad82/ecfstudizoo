@@ -31,6 +31,10 @@ export const columns: ColumnDef<ConsommationAnimal>[] = [
         accessorKey: 'heure'
     },
     {
+        header: 'Animal',
+        accessorKey: 'animal',
+    },
+    {
         header: 'Actions',
         accessorKey: 'actions',
         cell: ({row}) => {
@@ -45,11 +49,13 @@ export const columns: ColumnDef<ConsommationAnimal>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem>Détails</DropdownMenuItem>
-                        <Link href={`/api/consommation_animal/edit/${consommationAnimal.id}`}>
+                        <Link href={`/employe/employeConsommationAnimal/${consommationAnimal.id}`}>
+                            <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/employe/employeConsommationAnimal/${consommationAnimal.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/api/consommation_animal/delete/${consommationAnimal.id}`}>
+                        <Link href={`/employe/employeConsommationAnimal/${consommationAnimal.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>
