@@ -1,7 +1,7 @@
 "use server"
 
 import { getAnimalFromDb } from "@/app/api/animal/route"
-import AnimalformE from "@/components/formsbe/animalform/animalformE"
+import AnimalformE from "@/components/formsbe/animalforms/animalformE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Undo2 } from "lucide-react"
@@ -19,7 +19,7 @@ export default async function EditAnimalPage({params} : {params: {id:number}}){ 
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">
             <main className="grid flex-1 items-center gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-                <Card x-chunk="adminAnimal_create" className="bg-green-800">
+                <Card x-chunk="adminAnimal_edit" className="bg-green-800">
                     <CardHeader>
                         <CardTitle className="text-4xl text-yellow-400 text-center">Modifier l'animal du zoo Arcadia {params.id}</CardTitle>
                         <br />

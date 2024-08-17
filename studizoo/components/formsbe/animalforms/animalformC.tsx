@@ -1,27 +1,39 @@
 "use client"
 
 import { createAnimalInDb } from '@/app/api/animal/route'
+import { createImageAnimalInDb } from '@/app/api/image_animal/route'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { animalSchema } from '@/lib/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SendHorizontal } from 'lucide-react'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+
+const combinedSchema = z.object({
+    prenom : z.string(),
+    race: z.string(),
+    nom: z.string()
+})
+
 export default function AnimalformC() {
-    const form = useForm<z.infer<typeof animalSchema>>({
-        resolver: zodResolver(animalSchema),
+
+    const form = useForm<z.infer<typeof combinedSchema >>({
+        resolver: zodResolver(combinedSchema),
         defaultValues :{
             prenom:"",
-            race:""
+            race:"",
+            nom:""
         }
     })
-    const handleSubmit = (data:z.infer<typeof animalSchema>) => {
-        createAnimalInDb(data)
+    const handleSubmit = (data:z.infer<typeof combinedSchema>) => {
+        const {prenom, race, nom} = data;
+        createAnimalInDb({prenom, race});
+        createImageAnimalInDb({nom});
     }
+
 
     return (
         <Form {...form}>
@@ -53,6 +65,22 @@ export default function AnimalformC() {
                         </FormControl>
                         <FormDescription className='text-white'>
                             Entrez la race de l'animal
+                        </FormDescription>
+                        <FormMessage/>
+                    </FormItem>
+                )}
+                />
+                <FormField
+                control={form.control}
+                name="nom"
+                render={({field})=>(
+                    <FormItem>
+                        <FormLabel className='text-yellow-400'>Nom de l'image</FormLabel>
+                        <FormControl>
+                            <Input className="text-black" placeholder="Nom de l'image" {...field}/>
+                        </FormControl>
+                        <FormDescription className='text-white'>
+                            Entrez le nom de l'image
                         </FormDescription>
                         <FormMessage/>
                     </FormItem>

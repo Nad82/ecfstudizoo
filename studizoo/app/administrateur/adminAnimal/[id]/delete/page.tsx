@@ -1,6 +1,6 @@
 "use server"
 
-import AnimalformD from "@/components/formsbe/animalform/animalformD"
+import AnimalformD from "@/components/formsbe/animalforms/animalformD"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Undo2 } from "lucide-react"

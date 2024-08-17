@@ -39,7 +39,7 @@ export const columns: ColumnDef<Animal>[] = [
         cell: ({row}) => {
             const animal = row.original
             return (
-                <img src={animal.image_animal_id ? `http://localhost:3000/api/animal/${animal.image_animal_id}/image` : '/images/no-image.png'} alt={animal.prenom} className="h-12 w-12 object-cover rounded-full"/>
+                <img src={animal.image_animal_id ? `Blob url: https://8ctlnkpooioh3ypc.public.blob.vercel-storage.com/image` : '/images/no-image.png'} alt={animal.prenom} className="h-12 w-12 object-cover rounded-full"/>
             )
         }
     },
