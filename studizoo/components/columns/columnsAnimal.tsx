@@ -10,10 +10,20 @@ export type Animal ={
     id: number,
     prenom:string,
     race: string,
-    habitat_id: number|null,
-    image_animal_id: number|null,
-    compte_rendu_id: number|null,
-    consommation_animal_id: number|null
+    habitat:{
+        nom: string | null
+    }|null,
+    image_animal: {
+        id: number,
+        image: string
+    }[],
+    compte_rendu: {
+        id: number
+    }[],
+    consommation_animal: {
+        id: number
+    }[]
+
 }
 
 export const columns: ColumnDef<Animal>[] = [
@@ -31,25 +41,71 @@ export const columns: ColumnDef<Animal>[] = [
     },
     {
         header: "Habitat",
-        accessorKey: "habitat_id",
+        accessorKey: "habitatId",
+        cell : ({row}) => {
+            const animal = row.original
+            return (
+                <span>{animal.habitat?.nom ?` ${animal.habitat.nom}` : 'Pas d\'habitat'}</span>
+            )
+        }
     },
     {
         header: "Image",
-        accessorKey: "image_animal_id",
+        accessorKey: "image_animal",
         cell: ({row}) => {
             const animal = row.original
             return (
-                <img src={animal.image_animal_id ? `Blob url: https://8ctlnkpooioh3ypc.public.blob.vercel-storage.com/image` : '/images/no-image.png'} alt={animal.prenom} className="h-12 w-12 object-cover rounded-full"/>
+                <ul>
+                    {Array.isArray(animal.image_animal) ? (
+                        animal.image_animal.map((image) => (
+                            <li key={image.id}>{image.image}</li>
+                        ))
+                    ) : (
+                        'Pas d\'image pour cet animal'
+                    )}
+                </ul>
             )
         }
     },
     {
         header: "Compte rendu",
-        accessorKey: "compte_rendu_id",
+        accessorKey: "compte_rendu",
+        cell : ({row}) => {
+            const animal = row.original
+            return (
+                <span>
+                    <ul>
+                        {Array.isArray(animal.compte_rendu) ? (
+                            animal.compte_rendu.map((compteRendu) => (
+                                <li key={compteRendu.id}>{compteRendu.id}</li>
+                            ))
+                        ) : (
+                            <li>{'Pas de compte rendu pour cet animal'}</li>
+                        )}
+                    </ul>
+                </span>
+            )
+        }
     },
     {
         header: "Consommation",
-        accessorKey: "consommation_animal_id",
+        accessorKey: "consommation_animal",
+        cell : ({row}) => {
+            const animal = row.original
+            return (
+                <span>
+                    <ul>
+                        {Array.isArray(animal.consommation_animal) ? (
+                            animal.consommation_animal.map((consommation) => (
+                                <li key={consommation.id}>{consommation.id}</li>
+                            ))
+                        ) : (
+                            'Pas de consommation pour cet animal'
+                        )}
+                    </ul>
+                </span>
+            )
+        }
     },
     {
         header: 'Actions',

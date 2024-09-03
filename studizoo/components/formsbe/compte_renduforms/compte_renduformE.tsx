@@ -1,17 +1,19 @@
 "use client"
 
+import { getAllAnimalFromDb } from "@/app/api/animal/route"
 import { updateCompteRenduInDb } from "@/app/api/compte_rendu/route"
 import { Button } from "@/components/ui/button"
 import { DatetimePicker } from "@/components/ui/date-time-picker"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 import { compte_renduSchema } from "@/lib/zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { CalendarIcon} from "lucide-react"
-import React from "react"
+import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -25,6 +27,7 @@ export default function CompteRenduFormE({params} : {params: {id:number}}){
             nourriture:"",
             quantite_nourriture: 0,
             heure_passage:new Date(),
+            animalId:1
         }
     })
     const handleSubmit = (data:z.infer<typeof compte_renduSchema>) => {
@@ -32,6 +35,17 @@ export default function CompteRenduFormE({params} : {params: {id:number}}){
     }
 
     const [date, setDate] = React.useState<Date>(new Date());
+
+    const [animals, setAnimals] = React.useState<{ id: number; prenom: string | null }[] | null>(null);
+
+    useEffect(() => {
+        async function fetchAnimals() {
+            const data = await getAllAnimalFromDb();
+            setAnimals(data);
+        }
+        fetchAnimals();
+    }
+    ,[])
 
     return(
         <Form {...form}>
@@ -115,6 +129,39 @@ export default function CompteRenduFormE({params} : {params: {id:number}}){
                         </Popover>
                         <FormDescription className='text-white'>
                             Modifiez l'heure de passage 
+                        </FormDescription>
+                        <FormMessage/>
+                    </FormItem>
+                )}
+                />
+                <FormField
+                control={form.control}
+                name="animalId"
+                render={({field})=>(
+                    <FormItem>
+                        <FormLabel className='text-yellow-400'>Prenom de l'animal</FormLabel>
+                        <FormControl>
+                            <Select
+                                onValueChange={(value) => field.onChange(Number(value))}
+                                defaultValue={String(field.value)}
+                            >
+                                <SelectTrigger className="text-black">
+                                    <SelectValue className="text-black" placeholder= 'Selectionner un animal'/>
+                                </SelectTrigger>
+                                <SelectContent className="text-black">
+                                    <SelectGroup>
+                                        <SelectLabel className="text-black">Choisissez le prenom de l'animal</SelectLabel>
+                                        {animals?.map((animal) => (
+                                            <SelectItem className="text-black" key={animal.id} value={String(animal.id)}>
+                                                {animal.prenom??'Pas de prenom'}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </FormControl>
+                        <FormDescription className='text-white'>
+                            Selectionnez le nom de l'animal
                         </FormDescription>
                         <FormMessage/>
                     </FormItem>

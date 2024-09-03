@@ -8,7 +8,24 @@ import { z } from "zod";
 
 export const getAllHabitatFromDb = async () => {
     try{
-        const habitat = await db.habitat.findMany();
+        const habitat = await db.habitat.findMany({
+            include: {
+                etat_habitat: {
+                    select: {
+                        id: true
+                    }
+                },
+                image_habitat: {
+                    select: {
+                        image: true
+                }},
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
+            }
+        });
         return habitat
     }
     catch (error){
@@ -22,7 +39,22 @@ export const getHabitatFromDb = async (id: number) => {
         const habitat = await db.habitat.findFirst({
             where: {
                 id: id
-            }
+            },
+            include: {
+                etat_habitat: {
+                    select: {
+                        id: true
+                    }
+                },
+                image_habitat: {
+                    select: {
+                        image: true
+                }},
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+            }}
         })
         return habitat
     }
@@ -35,7 +67,13 @@ export const getHabitatFromDb = async (id: number) => {
 export const createHabitatInDb = async (habitat:z.infer<typeof habitatSchema>) => {
     try{
         await db.habitat.create({
-            data: habitat
+            data: habitat,
+            include: {
+                image_habitat: {
+                    select: {
+                        image: true
+                }}
+            }
         })
     }
     catch (error){
@@ -52,7 +90,13 @@ export const updateHabitatInDb = async (id: number,habitat:z.infer<typeof habita
             where: {
                 id: id
             },
-            data: habitat
+            data: habitat,
+            include: {
+                image_habitat: {
+                    select: {
+                        image: true
+                }}
+            }
         })
     }
     catch (error){
@@ -68,6 +112,12 @@ export const deleteHabitatInDb = async (id: number) => {
         await db.habitat.delete({
             where: {
                 id: id
+            },
+            include: {
+                image_habitat: {
+                    select: {
+                        image: true
+                }}
             }
         })
     }

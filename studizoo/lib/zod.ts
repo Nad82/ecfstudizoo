@@ -31,6 +31,7 @@ export const animalSchema = object({
     race : string({ required_error: "La race est requise"})
         .min(1, "La race est requise")
         .max(32,"La race doit contenir au maximum 32 caractères"),
+    habitatId: number ({ required_error: "L'habitatId est requis" })
 })
 
 export const avisSchema = object({
@@ -52,7 +53,8 @@ export const compte_renduSchema = object ({
         .max(255, "La nourriture doit contenir au maximum 255 caractères"),
     quantite_nourriture : number({ required_error: "La quantité de nourriture est requise"})
         .min(1, "La quantité de nourriture est requise"),
-    heure_passage: date({ required_error: "L'heure de passage est requise"})
+    heure_passage: date({ required_error: "L'heure de passage est requise"}),
+    animalId : number({ required_error: "L'animalId est requis"})
 })
 
 export const horairesSchema = object({
@@ -72,14 +74,16 @@ export const consommation_animalSchema = object({
         .min(1, "La nourriture est requise")
         .max(255, "La nourriture doit contenir au maximum 255 caractères"),
     quantite: number({ required_error: "La quantité est requise" }),
-    heure : date({ required_error: "L'heure est requise" })
+    heure : date({ required_error: "L'heure est requise" }),
+    animalId: number({ required_error: "L'animalId est requis" })
 })
 
 export const etat_habitatSchema = object({
     commentaires: string({ required_error: "Les commentaires sont requis" })
         .min(1, "Les commentaires sont requis")
         .max(255, "Les commentaires doivent contenir au maximum 255 caractères"),
-    amelioration: boolean({ required_error: "L'amélioration est requise" })
+    amelioration: boolean({ required_error: "L'amélioration est requise" }),
+    habitatId: number({ required_error: "L'habitatId est requis" })
 })
 
 export const habitatSchema = object ({
@@ -101,15 +105,17 @@ export const servicesSchema = object ({
 })
 
 export const image_animalSchema = object ({
-    nom: string({ required_error: "Le nom est requis" })
-        .min(1, "Le nom est requis")
-        .max(255, "Le nom doit contenir au maximum 255 caractères")
+    blob: string({ required_error: "Le blob est requis" })
+        .min(1, "Le blob est requis")
+        .max(255, "Le blob doit contenir au maximum 255 caractères"),
+    animalId: number({ required_error: "L'animalId est requis" })
 })
 
 export const image_habitatSchema = object ({
-    nom: string({ required_error: "Le nom est requis" })
-        .min(1, "Le nom est requis")
-        .max(255, "Le nom doit contenir au maximum 255 caractères")
+    blob: string({ required_error: "Le blob est requis" })
+        .min(1, "Le blob est requis")
+        .max(255, "Le blob doit contenir au maximum 255 caractères"),
+    habitatId: number({ required_error: "L'habitatId est requis" })
 })
 
 export const stat_animalSchema = object ({
@@ -119,3 +125,4 @@ export const stat_animalSchema = object ({
         .min(1, "Le prénom est requis")
         .max(255, "Le prénom doit contenir au maximum 255 caractères")
 })
+

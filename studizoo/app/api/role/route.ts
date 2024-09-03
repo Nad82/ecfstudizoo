@@ -8,7 +8,15 @@ import { z } from "zod";
 
 export const getAllRoleFromDb = async () => {
     try {
-        const role = await db.role.findMany();
+        const role = await db.role.findMany({
+            include: {
+                user: {
+                    select: {
+                        id: true
+                    }
+                }
+            }
+        });
         return role
     }
     catch (error) {
@@ -22,6 +30,13 @@ export const getRoleFromDb = async (id: number) => {
         const role = await db.role.findFirst({
             where: {
                 id: id
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true
+                    }
+                }
             }
         })
         return role

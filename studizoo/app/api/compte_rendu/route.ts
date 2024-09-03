@@ -9,7 +9,16 @@ import { z } from "zod";
 
 export const getAllCompteRenduFromDb = async () => {
     try{
-        const compte_rendu = await db.compte_rendu.findMany();
+        const compte_rendu = await db.compte_rendu.findMany({
+            relationLoadStrategy: 'query',
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                },
+            }
+        });
         return compte_rendu
     }
     catch (error){
@@ -21,9 +30,17 @@ export const getAllCompteRenduFromDb = async () => {
 export const getCompteRenduFromDb = async (id: number) => {
     try{
         const compte_rendu = await db.compte_rendu.findFirst({
+            relationLoadStrategy: 'query',
             where: {
                 id: id
-            }
+            },
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
+            }    
         })
         return compte_rendu
     }
@@ -36,7 +53,15 @@ export const getCompteRenduFromDb = async (id: number) => {
 export const createCompteRenduInDb = async (compte_rendu:z.infer<typeof compte_renduSchema>) => {
     try{
         await db.compte_rendu.create({
-            data: compte_rendu
+            relationLoadStrategy: 'query',
+            data: compte_rendu,
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
+            }
         })
     }
     catch (error){
@@ -51,10 +76,18 @@ export const createCompteRenduInDb = async (compte_rendu:z.infer<typeof compte_r
 export const updateCompteRenduInDb = async (id: number, compte_rendu:z.infer<typeof compte_renduSchema>) => {
     try{
         await db.compte_rendu.update({
+            relationLoadStrategy: 'query',
             where: {
                 id: id
             },
-            data: compte_rendu
+            data: compte_rendu,
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
+            }
         })
     }
     catch (error){
@@ -68,8 +101,16 @@ export const updateCompteRenduInDb = async (id: number, compte_rendu:z.infer<typ
 export const deleteCompteRenduInDb = async (id: number) => {
     try{
         await db.compte_rendu.delete({
+            relationLoadStrategy: 'query',
             where: {
                 id: id
+            },
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
             }
         })
     }

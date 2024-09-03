@@ -1,12 +1,15 @@
+
 import AnimalformC from "@/components/formsbe/animalforms/animalformC";
+import ImageAnimalformB from "@/components/formsbe/image_animalforms/image_animalformB";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Undo2 } from "lucide-react";
 import Link from "next/link";
-import ImageAnimalformC from "@/components/formsbe/image_animalforms/image_animalformC";
+
 
 
 export default function CreateAnimalPage() {
+
 
     return(
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -22,7 +25,7 @@ export default function CreateAnimalPage() {
                     </CardHeader>
                     <br />
                     <CardContent className=" text-white">
-                        <ImageAnimalformC />
+                        <ImageAnimalformB />
                         <br />
                         <AnimalformC />
                     </CardContent>

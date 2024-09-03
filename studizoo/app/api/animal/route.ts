@@ -6,10 +6,31 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+
 export const getAllAnimalFromDb = async () => {
     try{
-        const animal = await db.animal.findMany();
-        return animal
+        const animals = await db.animal.findMany({
+            relationLoadStrategy: 'query',
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                },
+                image_animal: {
+                    select: {
+                        image: true
+                    }
+                },
+                compte_rendu: true,
+                consommation_animal: {
+                    select: {
+                        id: true
+                    }
+                }
+            }}
+        );
+        return animals
     }
     catch (error){
         console.log(`Error at getAnimalFromDb: ${error}`)
@@ -19,12 +40,31 @@ export const getAllAnimalFromDb = async () => {
 
 export const getAnimalFromDb = async (id: number) => {
     try{
-        const animal = await db.animal.findUnique({
+        const animalId = await db.animal.findFirst({
+            relationLoadStrategy: 'query',
             where: {
                 id: id
+            },
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                },
+                image_animal: {
+                    select: {
+                        image: true
+                    }
+                },
+                compte_rendu: true,
+                consommation_animal: {
+                    select: {
+                        id: true
+                    }
+                }
             }
         })
-        return animal
+        return animalId
     }
     catch (error){
         console.log(`Error at getAnimalFromDb: ${error}`)
@@ -32,15 +72,35 @@ export const getAnimalFromDb = async (id: number) => {
     }
 }
 
+
 export const createAnimalInDb = async (animal:z.infer<typeof animalSchema>) => {
-    try{
+
+    try {
         await db.animal.create({
-            data: animal
-        })
+            data: animal,
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+            }
+        },
+        image_animal: {
+            select: {
+                image: true
+            }
+        },
+        compte_rendu: true,
+        consommation_animal: {
+            select: {
+                id: true
+            }
+        }
     }
-    catch (error){
-        console.log(`Error at createAnimalInDb: ${error}`)
-        return {error:"Une erreur est survenue lors de la création de l'animal"}
+})
+
+    } catch (error) {
+        console.error(`Error at createAnimalInDb: ${error}`)
+        throw error;
     }
     revalidatePath("/administrateur/adminAnimal",'page');
     redirect("/administrateur/adminAnimal")
@@ -49,10 +109,23 @@ export const createAnimalInDb = async (animal:z.infer<typeof animalSchema>) => {
 export const updateAnimalInDb = async (id: number, animal:z.infer<typeof animalSchema>) => {
     try{
         await db.animal.update({
+            relationLoadStrategy: 'query',
             where: {
                 id: id
             },
-            data: animal
+            data: animal,
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                },
+                image_animal: {
+                    select: {
+                        image: true
+                    }
+                }
+            }
         })
     }
     catch (error){
@@ -66,8 +139,21 @@ export const updateAnimalInDb = async (id: number, animal:z.infer<typeof animalS
 export const deleteAnimalInDb = async (id: number) => {
     try{
         await db.animal.delete({
+            relationLoadStrategy: 'query',
             where: {
                 id: id
+            },
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                },
+                image_animal: {
+                    select: {
+                        image: true
+                    }
+                }
             }
         })
     }

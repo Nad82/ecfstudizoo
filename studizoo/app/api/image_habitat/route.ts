@@ -8,7 +8,15 @@ import { z } from "zod";
 
 export const getAllImageHabitatFromDb = async () => {
     try {
-        const imageHabitat = await db.image_habitat.findMany();
+        const imageHabitat = await db.image_habitat.findMany({
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                }
+            }
+        });
         return imageHabitat
     }
     catch (error) {
@@ -22,6 +30,13 @@ export const getImageHabitatFromDb = async (id: number) => {
         const imageHabitat = await db.image_habitat.findFirst({
             where: {
                 id: id
+            },
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                }
             }
         })
         return imageHabitat

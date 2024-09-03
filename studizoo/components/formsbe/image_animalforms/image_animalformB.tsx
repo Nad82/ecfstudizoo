@@ -7,7 +7,7 @@ import { useState, useRef } from 'react';
 
 
 
-export default function ImageAnimalformC() {
+export default function ImageAnimalformB() {
 
     const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -27,7 +27,7 @@ export default function ImageAnimalformC() {
                 const file = inputFileRef.current.files[0];
                 const newBlob = await upload(file.name, file, {
                     access: 'public',
-                    handleUploadUrl: '/api/image_animal',
+                    handleUploadUrl: '/api/upload',
                 });
                 setBlob(newBlob);
             }

@@ -10,7 +10,10 @@ export type ConsommationAnimal ={
     id: number,
     nourriture:string,
     quantite: number,
-    heure: Date
+    heure: Date,
+    animal: {
+        prenom: string|null
+    }|null
 }
 
 export const columns: ColumnDef<ConsommationAnimal>[] = [
@@ -32,7 +35,13 @@ export const columns: ColumnDef<ConsommationAnimal>[] = [
     },
     {
         header: 'Animal',
-        accessorKey: 'animal',
+        accessorKey: 'animalId',
+        cell: ({row}) => {
+            const consommationAnimal = row.original
+            return (
+                <span>{consommationAnimal.animal?.prenom ? ` ${consommationAnimal.animal.prenom}` : 'Pas d\'animal'}</span>
+            )
+        }
     },
     {
         header: 'Actions',

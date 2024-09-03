@@ -30,7 +30,12 @@ export default async function VetoCompteRendusPage({params}: {params:{id: number
                                 <li>Etat: {compteRendu.etat}</li>
                                 <li>Nourriture: {compteRendu.nourriture}</li>
                                 <li>Quantité de nourriture: {compteRendu.quantite_nourriture}</li>
-                                <li>Heure de Passage: {compteRendu.heure_passage.toLocaleString()}</li>
+                                <li>Heure de Passage:{" "}
+                                    {compteRendu.heure_passage
+                                        ? compteRendu.heure_passage.toLocaleString()
+                                        : "Non spécifiée"}
+                                </li>
+                                <li>Animal: {compteRendu.animalId}</li>
                             </ul>
                         </div>
                     </CardContent>

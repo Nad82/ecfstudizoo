@@ -12,7 +12,9 @@ export type User={
     email_verified: Date|null,
     created_at:Date|null,
     updated_at: Date|null,
-    role_id:number
+    role:{
+        nom: string | null
+    }|null
 }
 
 export const columns: ColumnDef<User>[] = [
@@ -42,7 +44,13 @@ export const columns: ColumnDef<User>[] = [
     },
     {
         header: 'Role',
-        accessorKey: 'role_id'
+        accessorKey: 'role_id',
+        cell : ({row}) => {
+            const user = row.original
+            return (
+                <span>{user.role?.nom? `Role ${user.role.nom}` : 'Pas de role'}</span>
+            )
+        }
     },
     {
         header: 'Actions',

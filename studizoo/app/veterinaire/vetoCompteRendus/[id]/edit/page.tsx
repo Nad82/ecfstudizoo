@@ -34,7 +34,12 @@ export default async function EditCompteRendusPage ({params} : {params: {id:numb
                             <li>Etat: {compte_rendu.etat}</li>
                             <li>Nourriture: {compte_rendu.nourriture}</li>
                             <li>Quantité Nourriture: {compte_rendu.quantite_nourriture}</li>
-                            <li>Heure de passage : {compte_rendu.heure_passage.toLocaleString()}</li>
+                            <li>Heure de passage : 
+                                {compte_rendu.heure_passage
+                                    ? compte_rendu.heure_passage.toLocaleString()
+                                    : "Non spécifiée"}
+                            </li>
+                            <li>Animal: {compte_rendu.animalId}</li>
                         </ul>
                         <br />
                         <CompteRenduFormE params={params}/>

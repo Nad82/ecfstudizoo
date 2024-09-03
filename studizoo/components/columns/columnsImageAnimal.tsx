@@ -9,7 +9,10 @@ import Link from "next/link"
 
 export type ImageAnimal ={
     id: number,
-    nom:string|null,
+    image:string|null,
+    animal: {
+        prenom:string|null
+    }
 }
 
 export const columns: ColumnDef<ImageAnimal>[] = [
@@ -18,12 +21,18 @@ export const columns: ColumnDef<ImageAnimal>[] = [
         accessorKey: 'id'
     },
     {
-        header: "Nom",
-        accessorKey: "nom",
+        header: "Image",
+        accessorKey: "image",
     },
     {
         header: 'Animal',
-        accessorKey: 'animal',
+        accessorKey: 'animalId',
+        cell: ({row}) => {
+            const imageAnimal = row.original
+            return (
+                <span>{imageAnimal.animal?.prenom ? `Animal ${imageAnimal.animal.prenom}` : 'Pas d\'animal'}</span>
+            )
+        }
     },
     {
         header: 'Actions',

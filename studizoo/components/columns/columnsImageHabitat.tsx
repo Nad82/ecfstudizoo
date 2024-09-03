@@ -9,7 +9,10 @@ import Link from "next/link"
 
 export type ImageHabitat ={
     id: number,
-    nom:string|null,
+    image:string|null,
+    habitat: {
+        nom: string|null
+    }
 }
 
 export const columns: ColumnDef<ImageHabitat>[] = [
@@ -18,12 +21,18 @@ export const columns: ColumnDef<ImageHabitat>[] = [
         accessorKey: 'id'
     },
     {
-        header: "Nom",
-        accessorKey: "nom",
+        header: "Image",
+        accessorKey: "image",
     },
     {
         header: 'Habitat',
-        accessorKey: 'habitat',
+        accessorKey: 'habitatId',
+        cell: ({row}) => {
+            const imageHabitat = row.original
+            return (
+                <span>{imageHabitat.habitat?.nom ? `Habitat ${imageHabitat.habitat.nom}` : 'Pas d\'habitat'}</span>
+            )
+        }
     },
     {
         header: 'Actions',

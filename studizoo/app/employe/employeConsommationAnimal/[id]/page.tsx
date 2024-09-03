@@ -29,7 +29,12 @@ export default async function EmployeConsommationAnimalPage({params}: {params:{i
                             <ul className="text-lg">
                                 <li>Nourriture: {consommationAnimal.nourriture}</li>
                                 <li>Quantité de nourriture: {consommationAnimal.quantite}</li>
-                                <li>Heure de Passage: {consommationAnimal.heure.toLocaleString()}</li>
+                                <li>Heure de Passage: {''}
+                                    {consommationAnimal.heure
+                                        ? consommationAnimal.heure.toLocaleString()
+                                        : "Non spécifiée"}
+                                </li>
+                                <li>Animal: {consommationAnimal.animal?.prenom?? "Non spécifié"}</li>
                             </ul>
                         </div>
                     </CardContent>

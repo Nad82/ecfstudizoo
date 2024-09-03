@@ -1,13 +1,15 @@
 "use client"
 
 import { deleteAnimalInDb } from '@/app/api/animal/route'
+import { deleteImageAnimalInDb } from '@/app/api/image_animal/route'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 
 export default function AnimalformD({params} : {params: {id:number}}) {
     
     const handleSubmit = () => {
-        deleteAnimalInDb(Number(params.id))
+        deleteAnimalInDb(Number(params.id));
+        deleteImageAnimalInDb(Number(params.id));
     }
 
     return (

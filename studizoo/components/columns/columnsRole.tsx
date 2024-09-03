@@ -8,7 +8,10 @@ import Link from "next/link"
 
 export type Role ={
     id: number,
-    nom:string|null
+    nom:string|null,
+    user: {
+        email: string|null
+    }
 }
 
 export const columns: ColumnDef<Role>[] = [
@@ -19,6 +22,26 @@ export const columns: ColumnDef<Role>[] = [
     {
         header: "Nom",
         accessorKey: "nom",
+    },
+    {
+        header: 'User',
+        accessorKey: 'user',
+        cell: ({row}) => {
+            const role = row.original
+            return (
+                <span>
+                    <ul>
+                        {Array.isArray(role.user) ? (
+                            role.user.map((user, index) => (
+                                <li key={index}>{user.email}</li>
+                            ))
+                        ) : (
+                            <li>{'Pas d\'utilisateur'}</li>
+                        )}
+                    </ul>
+                </span>
+            )
+        }
     },
     {
         header: 'Actions',

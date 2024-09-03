@@ -5,12 +5,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getAllCompteRenduFromDb } from "@/app/api/compte_rendu/route";
-import { Plus, Undo2 } from "lucide-react";
+import { Undo2 } from "lucide-react";
 
 
 export default async function AdminCompteRendus() {
     const compteRendus = await getAllCompteRenduFromDb();
-    
+
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">

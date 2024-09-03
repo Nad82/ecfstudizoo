@@ -33,7 +33,12 @@ export default async function EditEmployeConsommationAnimalPage ({params} : {par
                             <ul>
                                 <li>Nourriture: {consommation_animal.nourriture}</li>
                                 <li>Quantité: {consommation_animal.quantite}</li>
-                                <li>Heure: {consommation_animal.heure.toLocaleString() }</li>
+                                <li>Heure: {''}
+                                    {consommation_animal.heure
+                                        ? consommation_animal.heure.toLocaleString()
+                                        : "Non spécifiée"}
+                                </li>
+                                <li>Animal: {consommation_animal.animal?.prenom?? "Non spécifié"}</li>
                             </ul>
                             <br />
                             <ConsommationAnimalformE params={params}/>

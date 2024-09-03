@@ -10,6 +10,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { SendHorizontal } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useEffect, useState } from "react"
+import { getAllHabitatFromDb } from "@/app/api/habitat/route"
 
 
 
@@ -20,8 +23,20 @@ export default function EtatHabitatFormE({params}: {params:{id: number}}) {
         defaultValues:{
             commentaires: "",
             amelioration: false,
+            habitatId: 1
         }
     })
+
+    const [habitats, setHabitats] = useState<{ id: number; nom: string | null; description: string | null; }[] | null>(null);
+
+    useEffect(() => {
+        async function fetchHabitats() {
+            const data = await getAllHabitatFromDb();
+            setHabitats(data);
+        }
+        fetchHabitats();
+    }
+    ,[])
 
     const handleSubmit = (data: z.infer<typeof etat_habitatSchema>) => {
         updateEtatHabitatInDb(Number(params.id), data)
@@ -62,6 +77,39 @@ export default function EtatHabitatFormE({params}: {params:{id: number}}) {
                         </FormControl>
                         <FormDescription className='text-white'>
                             Modifiez si l'amélioration est nécessaire
+                        </FormDescription>
+                        <FormMessage/>
+                    </FormItem>
+                )}
+                />
+                <FormField
+                control={form.control}
+                name="habitatId"
+                render={({field})=>(
+                    <FormItem>
+                        <FormLabel className='text-yellow-400'>Habitat</FormLabel>
+                        <FormControl>
+                            <Select
+                                onValueChange={(value) => field.onChange(Number(value))}
+                                defaultValue={String(field.value)}
+                            >
+                                <SelectTrigger className="text-black">
+                                        <SelectValue className="text-black" placeholder= "Modifier l'/habitat"/>
+                                    </SelectTrigger>
+                                    <SelectContent className="text-black">
+                                        <SelectGroup>
+                                            <SelectLabel className="text-black">Modifiez le nom de l'habitat</SelectLabel>
+                                            {habitats?.map((habitat) => (
+                                                <SelectItem className="text-black" key={habitat.id} value={String(habitat.id)}>
+                                                    {habitat.nom?? 'Pas de nom'}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                        </FormControl>
+                        <FormDescription className='text-white'>
+                            Modifiez le nom de l'habitat
                         </FormDescription>
                         <FormMessage/>
                     </FormItem>

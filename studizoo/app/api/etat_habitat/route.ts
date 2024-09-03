@@ -8,7 +8,15 @@ import { z } from "zod";
 
 export const getAllEtatHabitatFromDb = async () => {
     try{
-        const etat_habitat = await db.etat_habitat.findMany();
+        const etat_habitat = await db.etat_habitat.findMany({
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                }
+            }
+        });
         return etat_habitat
     }
     catch (error){
@@ -22,6 +30,13 @@ export const getEtatHabitatFromDb = async (id: number) => {
         const etat_habitat = await db.etat_habitat.findFirst({
             where: {
                 id: id
+            },
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                }
             }
         })
         return etat_habitat
@@ -35,7 +50,14 @@ export const getEtatHabitatFromDb = async (id: number) => {
 export const createEtatHabitatInDb = async (etat_habitat:z.infer<typeof etat_habitatSchema>) => {
     try{
         await db.etat_habitat.create({
-            data: etat_habitat
+            data: etat_habitat,
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                }
+            }
         })
     }
     catch (error){
@@ -52,7 +74,14 @@ export const updateEtatHabitatInDb = async (id: number, etat_habitat:z.infer<typ
             where: {
                 id: id
             },
-            data: etat_habitat
+            data: etat_habitat,
+            include: {
+                habitat: {
+                    select: {
+                        nom: true || null
+                    }
+                }
+            }
         })  
     }
     catch (error){
@@ -68,6 +97,13 @@ export const deleteEtatHabitatInDb = async (id: number) => {
         await db.etat_habitat.delete({
             where: {
                 id: id
+            },
+            include: {
+                habitat: {
+                    select: {
+                        nom: true
+                    }
+                }
             }
         })
     }

@@ -7,9 +7,11 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { consommation_animalSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { getAllAnimalFromDb } from "@/app/api/animal/route";
 
 
 
@@ -20,12 +22,25 @@ export default function ConsommationAnimalformE({params} : {params: {id:number}}
             nourriture:"",
             quantite:0,
             heure:new Date(),
+            animalId:1
         }
     })
+
+    const [date, setDate] = React.useState<Date>(new Date());
+
+    const [animals, setAnimals] = React.useState<{ id: number; prenom: string |null; }[] | null>(null);
+
+    useEffect(() => {
+        async function fetchAnimals() {
+            const data = await getAllAnimalFromDb();
+            setAnimals(data);
+        }
+        fetchAnimals();
+    }
+    ,[])
     const handleSubmit=(data:z.infer<typeof consommation_animalSchema>)=>{
         updateConsommationAnimalInDb(Number(params.id), data)
     }
-    const [date, setDate] = React.useState<Date>(new Date());
 
     return(
         <Form {...form}>
@@ -77,6 +92,39 @@ export default function ConsommationAnimalformE({params} : {params: {id:number}}
                         </FormControl>
                         <FormDescription className='text-white'>
                             Modifiez l'heure de la consommation
+                        </FormDescription>
+                        <FormMessage/>
+                    </FormItem>
+                )}
+                />
+                <FormField
+                control={form.control}
+                name="animalId"
+                render={({field})=>(
+                    <FormItem>
+                        <FormLabel className='text-yellow-400'>Animal</FormLabel>
+                        <FormControl>
+                            <Select
+                                onValueChange={(value) => field.onChange(Number(value))}
+                                defaultValue={String(field.value)}
+                            >
+                                <SelectTrigger className="text-black">
+                                    <SelectValue className="text-black" placeholder= 'Selectionner un animal'/>
+                                </SelectTrigger>
+                                <SelectContent className="text-black">
+                                    <SelectGroup>
+                                        <SelectLabel className="text-black">Choisissez un animal</SelectLabel>
+                                        {animals?.map((animal) => (
+                                            <SelectItem className="text-black" key={animal.id} value={String(animal.id)}>
+                                                {animal.prenom?? 'Pas de prénom'}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </FormControl>
+                        <FormDescription className='text-white'>
+                            Modifiez l'animal
                         </FormDescription>
                         <FormMessage/>
                     </FormItem>

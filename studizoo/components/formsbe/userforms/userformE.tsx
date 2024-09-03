@@ -11,9 +11,11 @@ import { userSchema } from "@/lib/zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { CalendarIcon, SendHorizontal } from "lucide-react"
-import React from "react"
+import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { getAllRoleFromDb } from "@/app/api/role/route"
 
 
 export default function UserformE ({params} : {params: {id:number}}){
@@ -29,10 +31,21 @@ export default function UserformE ({params} : {params: {id:number}}){
         }
     })
 
+    const [date, setDate] = React.useState<Date>(new Date());
+    const [roles, setRoles] = React.useState<{ id: number; nom: string |null; }[] | null>(null);
+
+    useEffect(() => {
+        async function fetchRole() {
+            const data = await getAllRoleFromDb();
+            setRoles(data);
+        }
+        fetchRole();
+    }
+    ,[])
     const handleSubmit = (data:z.infer<typeof userSchema>) => {
         updateUserInDb(Number(params.id), data)
     }
-    const [date, setDate] = React.useState<Date>(new Date());
+    
 
     return (
         <Form {...form}>
@@ -152,7 +165,24 @@ export default function UserformE ({params} : {params: {id:number}}){
                     <FormItem>
                         <FormLabel className='text-yellow-400'>Role</FormLabel>
                         <FormControl>
-                            <Input type='number'className="text-black" placeholder="Role"{...field} onChange={event => field.onChange(+event.target.value)}/>
+                            <Select
+                                onValueChange={(value) => field.onChange(Number(value))}
+                                defaultValue={String(field.value)}
+                            >
+                                <SelectTrigger className="text-black">
+                                    <SelectValue className="text-black" placeholder= 'Selectionner un rôle pour un utilisateur'/>
+                                </SelectTrigger>
+                                <SelectContent className="text-black">
+                                    <SelectGroup>
+                                        <SelectLabel className="text-black">Modifiez le role de l'utilisateur</SelectLabel>
+                                        {roles?.map((role) => (
+                                            <SelectItem className="text-black" key={role.id} value={String(role.id)}>
+                                                {role.nom?? 'Pas de nom'}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </FormControl>
                         <FormDescription className='text-white'>
                             Modifiez le role de l'utilisateur

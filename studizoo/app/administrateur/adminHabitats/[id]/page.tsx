@@ -31,8 +31,15 @@ export default async function HabitatPage ({params} : {params: {id:number}}){
                     <br />
                     <CardContent className=" text-white">
                         <ul>
-                            <li>Nom: {habitat.nom}</li>
-                            <li>Description: {habitat.description}</li>
+                            <li>Nom: {habitat.nom??'Nom non disponible'}</li>
+                            <li>Description: {habitat.description?? 'Description non disponible'}</li>
+                            <li>Animaux:
+                                <ul>
+                                    {habitat.animal?.map((animal,index) => (
+                                        <li key={index}>{animal.prenom??'Prénom non disponible'}</li>
+                                    ))??'Pas d\'animaux dans cet habitat'}
+                                </ul> 
+                            </li>
                         </ul>
                     </CardContent>
                     <br />

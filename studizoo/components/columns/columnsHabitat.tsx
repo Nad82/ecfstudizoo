@@ -11,8 +11,15 @@ export type Habitat ={
     id:number,
     nom:string,
     description: string,
-    image_habitat_id: number|null,
-    etat_habitat_id: number|null
+    image_habitat: {
+        image: string|null
+    },
+    etat_habitat: {
+        id: number|null
+    },
+    animal: {
+        prenom:string|null
+    }
 }
 
 export const columns: ColumnDef<Habitat>[] = [
@@ -30,17 +37,62 @@ export const columns: ColumnDef<Habitat>[] = [
     },
     {
         header: 'Image',
-        accessorKey: 'image_habitat_id',
+        accessorKey: 'image_habitat',
         cell: ({row}) => {
             const habitat = row.original
             return (
-                <img src={habitat.image_habitat_id ? `http://localhost:3000/api/habitat/${habitat.image_habitat_id}/image` : '/images/no-image.png'} alt={habitat.nom} className="h-12 w-12 object-cover rounded-full"/>
+                <>
+                    {Array.isArray(habitat.image_habitat) ? (
+                        habitat.image_habitat.map((image, index) => (
+                            <img key={index} src={`Blob url: ${image.image}`} alt={habitat.nom} className="h-12 w-12 object-cover rounded-full"/>
+                        ))
+                    ) : (
+                        // If there is no image, display a default image
+                        <img src='/images/no-image.png' alt={habitat.nom} className="h-12 w-12 object-cover rounded-full"/>
+                    )}
+                </>
             )
         }
     },
     {
         header: 'Etat',
-        accessorKey: 'etat_habitat_id'
+        accessorKey: 'etat_habitat',
+        cell : ({row}) => {
+            const habitat = row.original
+            return (
+                <span>
+                    <ul>
+                        {Array.isArray(habitat.etat_habitat) ? (
+                            habitat.etat_habitat.map((etat, index) => (
+                                <li key={index}>{etat.id?? 'Id non disponible'}</li>
+                            ))
+                        ) : (
+                            'Pas d\'état pour cet habitat'
+                        )}
+                    </ul>
+                </span>
+            )
+        }
+    },
+    {
+        header: 'Animaux',
+        accessorKey: 'animal',
+        cell : ({row}) => {
+            const habitat = row.original;
+            return (
+                <span>
+                    <ul>
+                    {Array.isArray(habitat.animal) ? (
+                        habitat.animal.map((animal, index) => (
+                            <li key={index}>{animal.prenom ?? 'Prénom non disponible'}</li>
+                        ))
+                    ) : (
+                        'Pas d\'animaux dans cet habitat'
+                    )}
+                    </ul>
+                </span>
+            )
+        }
     },
     {
         header: 'Actions',

@@ -1,37 +1,45 @@
 "use client"
 
 import { createAnimalInDb } from '@/app/api/animal/route'
-import { createImageAnimalInDb } from '@/app/api/image_animal/route'
+import { getAllHabitatFromDb } from '@/app/api/habitat/route'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {animalSchema } from '@/lib/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SendHorizontal } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-
-const combinedSchema = z.object({
-    prenom : z.string(),
-    race: z.string(),
-    nom: z.string()
-})
 
 export default function AnimalformC() {
 
-    const form = useForm<z.infer<typeof combinedSchema >>({
-        resolver: zodResolver(combinedSchema),
-        defaultValues :{
-            prenom:"",
-            race:"",
-            nom:""
+    const form = useForm<z.infer<typeof animalSchema >>({
+        resolver: zodResolver(animalSchema),
+        defaultValues: {
+            prenom: "",
+            race: "",
+            habitatId: 1
         }
-    })
-    const handleSubmit = (data:z.infer<typeof combinedSchema>) => {
-        const {prenom, race, nom} = data;
-        createAnimalInDb({prenom, race});
-        createImageAnimalInDb({nom});
+    }) 
+
+    
+
+    const [habitats, setHabitats] = useState<{ id: number; nom: string |null; description: string |null; }[] | null>(null);
+
+    useEffect(() => {
+        async function fetchHabitats() {
+            const data = await getAllHabitatFromDb();
+            setHabitats(data);
+        }
+        fetchHabitats();
+    }
+    ,[])
+
+    const handleSubmit = (data:z.infer<typeof animalSchema>) => {
+        createAnimalInDb(data)
     }
 
 
@@ -71,20 +79,37 @@ export default function AnimalformC() {
                 )}
                 />
                 <FormField
-                control={form.control}
-                name="nom"
-                render={({field})=>(
-                    <FormItem>
-                        <FormLabel className='text-yellow-400'>Nom de l'image</FormLabel>
-                        <FormControl>
-                            <Input className="text-black" placeholder="Nom de l'image" {...field}/>
-                        </FormControl>
-                        <FormDescription className='text-white'>
-                            Entrez le nom de l'image
-                        </FormDescription>
-                        <FormMessage/>
-                    </FormItem>
-                )}
+                    control={form.control}
+                    name="habitatId"
+                    render={({field})=>(
+                        <FormItem>
+                            <FormLabel className='text-yellow-400'>Nom de l'habitat</FormLabel>
+                            <FormControl>
+                                <Select  
+                                    onValueChange={(value) => field.onChange(Number(value))}
+                                    defaultValue={String(field.value)}
+                                >
+                                    <SelectTrigger className="text-black">
+                                        <SelectValue className="text-black" placeholder= 'Selectionner un habitat'/>
+                                    </SelectTrigger>
+                                    <SelectContent className="text-black">
+                                        <SelectGroup>
+                                            <SelectLabel className="text-black">Choisissez le nom de l'habitat</SelectLabel>
+                                            {habitats?.map((habitat) => (
+                                                <SelectItem className="text-black" key={habitat.id} value={String(habitat.id)}>
+                                                    {habitat.nom?? 'Pas de nom'}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                            </FormControl>
+                            <FormDescription className='text-white'>
+                                Selectionnez le nom de l'habitat
+                            </FormDescription>
+                            <FormMessage/>
+                        </FormItem>
+                    )}
                 />
                 <br />
                 <div className="flex h-full items-center justify-center p-6">

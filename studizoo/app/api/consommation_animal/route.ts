@@ -8,7 +8,15 @@ import { z } from "zod";
 
 export const getAllConsommationAnimalFromDb = async () => {
     try{
-        const consommation_animal = await db.consommation_animal.findMany();
+        const consommation_animal = await db.consommation_animal.findMany({
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
+            }
+        });
         return consommation_animal
     }
     catch (error){
@@ -22,6 +30,13 @@ export const getConsommationAnimalFromDb = async (id: number) => {
         const consommation_animal = await db.consommation_animal.findFirst({
             where: {
                 id: id
+            },
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
             }
         })
         return consommation_animal
@@ -36,7 +51,14 @@ export const getConsommationAnimalFromDb = async (id: number) => {
 export const createConsommationAnimalInDb = async (consommation_animal:z.infer<typeof consommation_animalSchema>) => {
     try{
         await db.consommation_animal.create({
-            data: consommation_animal
+            data: consommation_animal,
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
+            }
         })
     }
     catch (error){
@@ -54,7 +76,14 @@ export const updateConsommationAnimalInDb = async (id:number, consommation_anima
             where: {
                 id: id
             },
-            data: consommation_animal
+            data: consommation_animal,
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
+            }
         })
     }
     catch (error){
@@ -70,6 +99,13 @@ export const deleteConsommationAnimalInDb = async (id: number) => {
         await db.consommation_animal.delete({
             where: {
                 id: id
+            },
+            include: {
+                animal: {
+                    select: {
+                        prenom: true
+                    }
+                }
             }
         })
     }

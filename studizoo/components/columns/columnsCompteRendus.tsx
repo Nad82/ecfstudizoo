@@ -12,6 +12,9 @@ export type CompteRendus ={
     nourriture: string,
     quantite_nourriture: number,
     heure_passage: Date
+    animal: {
+        prenom: string|null
+    }
 }
 
 export const columns: ColumnDef<CompteRendus>[] = [
@@ -37,13 +40,19 @@ export const columns: ColumnDef<CompteRendus>[] = [
     },
     {
         header: 'Animal',
-        accessorKey: 'animal'
+        accessorKey: 'animalId',
+        cell: ({row}) => {
+            const compteRendu = row.original
+            return (
+                <span>{compteRendu.animal?.prenom ? ` ${compteRendu.animal.prenom}` : 'Pas d\'animal'}</span>
+            )
+        }
     },
     {
         header: 'Actions',
         accessorKey: 'actions',
         cell: ({row}) => {
-            const compteRendus = row.original
+            const compteRendu = row.original
             return (
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -54,13 +63,13 @@ export const columns: ColumnDef<CompteRendus>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendus.id}`}>
+                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendu.id}`}>
                             <DropdownMenuItem>Détails</DropdownMenuItem>
                         </Link>
-                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendus.id}/edit`}>
+                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendu.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendus.id}/delete`}>
+                        <Link href={`/veterinaire/vetoCompteRendus/${compteRendu.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>

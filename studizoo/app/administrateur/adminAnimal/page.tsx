@@ -11,7 +11,6 @@ import { Plus, Undo2 } from "lucide-react";
 export default async function AdminAnimal() {
     const animal = await getAllAnimalFromDb();
 
-
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
             <main className="grid flex-1 items-center gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -29,7 +28,7 @@ export default async function AdminAnimal() {
                     </CardHeader>
                     <br />
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={animal!} />
+                        <DataTable columns={columns} data={animal} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/administrateur">
