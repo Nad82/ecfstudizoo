@@ -11,8 +11,8 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { Button } from './ui/button'
 import Link from 'next/link'
+import { SignIn } from './auth/signin-button'
 
 
 export function MenuRes() {
@@ -55,9 +55,7 @@ export function MenuRes() {
                             <br/>
                         <SheetFooter>
                             <SheetClose>
-                                <Link href='/connexion'>
-                                    <Button variant="default" size="sm"><User/>Connexion Employe</Button>
-                                </Link>
+                                <SignIn/>
                             </SheetClose>
                         </SheetFooter>
                     </SheetContent>

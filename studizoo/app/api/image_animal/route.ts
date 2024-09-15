@@ -91,4 +91,3 @@ export const deleteImageAnimalInDb = async (id: number) => {
     revalidatePath("/administrateur/adminAnimal", 'page');
     redirect("/administrateur/adminAnimal")
 }
-

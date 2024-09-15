@@ -92,7 +92,7 @@ export default function ConsommationAnimalformC() {
                             <PopoverTrigger asChild>
                             <FormControl>
                                 <Button 
-                                    variant={"outline"}
+                                    variant={"secondary"}
                                     className={cn(
                                         "w-[240px] pl-3 text-left font-normal",
                                         !date && "text-muted-foreground"
@@ -107,7 +107,6 @@ export default function ConsommationAnimalformC() {
                                 <DatetimePicker
                                 selected={date}
                                 setDate={setDate}
-                                initialFocus
                             />
                             </PopoverContent>
                         </Popover>

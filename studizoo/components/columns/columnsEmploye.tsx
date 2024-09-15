@@ -48,7 +48,7 @@ export const columns: ColumnDef<User>[] = [
         cell : ({row}) => {
             const user = row.original
             return (
-                <span>{user.role?.nom? `Role ${user.role.nom}` : 'Pas de role'}</span>
+                <span>{user.role?.nom? ` ${user.role.nom}` : 'Pas de role'}</span>
             )
         }
     },
@@ -67,13 +67,13 @@ export const columns: ColumnDef<User>[] = [
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align='end'>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <Link href={`/administrateur/adminEmploye/${user.id}`}>
+                        <Link href={`/administrateur/adminUser/${user.id}`}>
                             <DropdownMenuItem>Détails</DropdownMenuItem>
                         </Link>
-                        <Link href={`/administrateur/adminEmploye/${user.id}/edit`}>
+                        <Link href={`/administrateur/adminUser/${user.id}/edit`}>
                             <DropdownMenuItem>Modifier</DropdownMenuItem>
                         </Link>
-                        <Link href={`/administrateur/adminEmploye/${user.id}/delete`}>
+                        <Link href={`/administrateur/adminUser/${user.id}/delete`}>
                             <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>

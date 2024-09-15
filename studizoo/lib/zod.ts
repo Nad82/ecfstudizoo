@@ -17,7 +17,8 @@ export const userSchema = object({
     password: string({ required_error: "Le mot de passe est requis" })
         .min(1, "Le mot de passe est requis")
         .min(8, "Le mot de passe doit contenir au moins 8 caractères")
-        .max(32, "Le mot de passe doit contenir au maximum 32 caractères"),
+        .max(20, "Le mot de passe doit contenir au maximum 32 caractères")
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre"),
     email_verified: date({ required_error: "L'email_verified est requis" }),
     created_at: date({ required_error: "Le created_at est requis" }),
     updated_at: date({ required_error: "Le updated_at est requis" }),

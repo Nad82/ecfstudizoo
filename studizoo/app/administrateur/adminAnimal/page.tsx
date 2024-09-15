@@ -4,8 +4,8 @@ import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getAllAnimalFromDb } from "@/app/api/animal/route";
 import { Plus, Undo2 } from "lucide-react";
+import { getAllAnimalFromDb } from "@/app/api/animal/route";
 
 
 export default async function AdminAnimal() {

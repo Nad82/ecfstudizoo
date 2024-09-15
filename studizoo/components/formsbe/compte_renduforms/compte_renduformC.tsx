@@ -123,7 +123,6 @@ export default function CompteRenduFormC(){
                                 <DatetimePicker
                                 selected={date}
                                 setDate={setDate}
-                                initialFocus
                             />
                             </PopoverContent>
                         </Popover>

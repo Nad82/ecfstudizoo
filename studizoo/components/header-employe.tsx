@@ -7,6 +7,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbS
 import { Input } from './ui/input'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger,DropdownMenuLabel } from './ui/dropdown-menu'
 import { Tooltip, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+import { SignOut } from './auth/signout-button'
 
 
 export default function HeaderE() {
@@ -125,7 +126,9 @@ export default function HeaderE() {
                         <DropdownMenuLabel>Mon Compte</DropdownMenuLabel>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem>Paramètres</DropdownMenuItem>
-                        <DropdownMenuItem>Se déconnecter</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <SignOut/>
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </header> 

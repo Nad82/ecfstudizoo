@@ -59,7 +59,7 @@ export default function AsidebarA() {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                            href='administrateur/adminEmploye'
+                            href='administrateur/adminUser'
                             className='flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8'
                             >
                                 <User className='h-5 w-5'/>

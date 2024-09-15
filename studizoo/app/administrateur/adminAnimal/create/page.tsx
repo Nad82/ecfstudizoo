@@ -7,9 +7,7 @@ import { Undo2 } from "lucide-react";
 import Link from "next/link";
 
 
-
 export default function CreateAnimalPage() {
-
 
     return(
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">

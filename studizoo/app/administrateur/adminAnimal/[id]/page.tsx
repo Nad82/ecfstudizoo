@@ -1,10 +1,6 @@
 "use server"
 
 import { getAnimalFromDb } from "@/app/api/animal/route"
-import { getCompteRenduFromDb } from "@/app/api/compte_rendu/route"
-import { getConsommationAnimalFromDb } from "@/app/api/consommation_animal/route"
-import { getHabitatFromDb } from "@/app/api/habitat/route"
-import { getImageAnimalFromDb } from "@/app/api/image_animal/route"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Undo2 } from "lucide-react"

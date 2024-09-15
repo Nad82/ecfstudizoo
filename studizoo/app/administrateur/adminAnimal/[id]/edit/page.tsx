@@ -1,8 +1,6 @@
 "use server"
 
 import { getAnimalFromDb } from "@/app/api/animal/route"
-import { getHabitatFromDb } from "@/app/api/habitat/route"
-import { getImageAnimalFromDb } from "@/app/api/image_animal/route"
 import AnimalformE from "@/components/formsbe/animalforms/animalformE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"

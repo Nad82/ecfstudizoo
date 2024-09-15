@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import Link  from 'next/link'
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
@@ -7,9 +9,11 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbS
 import { Input } from './ui/input'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger,DropdownMenuLabel } from './ui/dropdown-menu'
 import { Tooltip, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+import { SignOut } from './auth/signout-button'
 
 
 export default function HeaderA() {
+
     return (
         <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
             <header className='sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6'>
@@ -44,7 +48,7 @@ export default function HeaderA() {
                                 <span className='sr-only'>Compte Rendus</span>
                             </Link>
                             <Link
-                            href="administrateur/adminEmploye"
+                            href="administrateur/adminUser"
                             className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground'
                             >
                                 <User className='h-5 w-5'/>
@@ -132,7 +136,7 @@ export default function HeaderA() {
                     <BreadcrumbSeparator/>
                     <BreadcrumbItem>
                         <BreadcrumbLink asChild>
-                            <Link href='administrateur/adminEmploye'>Employés</Link>
+                            <Link href='administrateur/adminUser'>Employés</Link>
                         </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator/>
@@ -196,7 +200,9 @@ export default function HeaderA() {
                         <DropdownMenuLabel>Mon Compte</DropdownMenuLabel>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem>Paramètres</DropdownMenuItem>
-                        <DropdownMenuItem>Se déconnecter</DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <SignOut/>
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </header> 

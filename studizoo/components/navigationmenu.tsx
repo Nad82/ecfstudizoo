@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Telescope, User, Phone, TreePalm, Home } from 'lucide-react'
+import { Telescope, Phone, TreePalm, Home } from 'lucide-react'
 import {
     NavigationMenu,
     NavigationMenuItem,
@@ -10,7 +10,7 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { Button } from "./ui/button"
+import { SignIn } from "./auth/signin-button"
 
 
 export function Navigation() {
@@ -48,9 +48,7 @@ export function Navigation() {
                 <NavigationMenuItem>
                     <Link href='/connexion' legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            <Button variant="default" size="sm">
-                                <User/>Connexion Employe
-                            </Button>
+                            <SignIn/>
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>

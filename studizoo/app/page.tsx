@@ -8,25 +8,23 @@ import { Formulaireavis } from "@/components/formulaireavis";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-
-
-
 export default function Home() {
+
   return (
-    <div>
-      <Header />
-        <Videohome />
-        <br/>
-        <Aproposhome />
-        <br />
-        <Serviceshome />
-        <br />
-        <Habitatshome />
-        <br />
-        <Temoignagehome />
-        <br />
-        <Formulaireavis />
-      <Footer/>
-    </div>
+      <div>
+        <Header />
+          <Videohome />
+          <br/>
+          <Aproposhome />
+          <br />
+          <Serviceshome />
+          <br />
+          <Habitatshome />
+          <br />
+          <Temoignagehome />
+          <br />
+          <Formulaireavis />
+        <Footer/>
+      </div>
   )
 }

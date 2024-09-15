@@ -1,7 +1,5 @@
 "use client"
 
-import { createAnimalInDb } from '@/app/api/animal/route'
-import { getAllHabitatFromDb } from '@/app/api/habitat/route'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -12,6 +10,8 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { getAllHabitatFromDb } from '@/app/api/habitat/route'
+import { createAnimalInDb } from '@/app/api/animal/route'
 
 
 export default function AnimalformC() {
@@ -24,8 +24,6 @@ export default function AnimalformC() {
             habitatId: 1
         }
     }) 
-
-    
 
     const [habitats, setHabitats] = useState<{ id: number; nom: string |null; description: string |null; }[] | null>(null);
 
@@ -41,7 +39,6 @@ export default function AnimalformC() {
     const handleSubmit = (data:z.infer<typeof animalSchema>) => {
         createAnimalInDb(data)
     }
-
 
     return (
         <Form {...form}>
