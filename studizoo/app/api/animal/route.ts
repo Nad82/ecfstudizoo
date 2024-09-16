@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 
+
 export const getAllAnimalFromDb = async () => {
     try{
         const animals = await db.animal.findMany({

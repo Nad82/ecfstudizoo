@@ -1,55 +1,32 @@
 "use server"
 
-import { NextResponse } from 'next/server';
-import { handleUpload, type HandleUploadBody } from '@vercel/blob/client';
+import { NextRequest, NextResponse } from "next/server";
+import path from "path";
+import { writeFile } from "fs/promises";
 
 
-export async function POST(request: Request): Promise<NextResponse> {
-    const body = (await request.json()) as HandleUploadBody;
+export const POST = async (req: NextRequest) => {
+    const formData = await req.formData();
 
+    const file = formData.get("file");
+    if (!file || !(file instanceof File)) {
+    return NextResponse.json({ error: "Aucun fichier n'a été trouvé" },
+        { status: 400 });
+    }
+    const buffer = Buffer.from(await file.arrayBuffer())
+    const filename = `${new Date().getTime()}_${file.name}`
+    console.log(`filename: ${filename}`)
     try {
-        const jsonResponse = await handleUpload({
-        body,
-        request,
-        onBeforeGenerateToken: async (
-            pathname,
-          /* clientPayload */
-        ) => {
-          // Generate a client token for the browser to upload the file
-          // ⚠️ Authenticate and authorize users before generating the token.
-          // Otherwise, you're allowing anonymous uploads.
-
-            return {
-                allowedContentTypes: ['image/jpeg', 'image/png', 'image/gif'],
-                tokenPayload: JSON.stringify({
-                // optional, sent to your server on upload completion
-                // you could pass a user id from auth, or a value from clientPayload
-            }),
-            };
-        },
-        onUploadCompleted: async ({ blob, tokenPayload }) => {
-          // Get notified of client upload completion
-          // ⚠️ This will not work on `localhost` websites,
-          // Use ngrok or similar to get the full upload flow
-
-            console.log('blob upload completed', blob, tokenPayload);
-
-            try {
-            // Run any logic after the file upload completed
-            // const { userId } = JSON.parse(tokenPayload);
-            // await db.update({ avatar: blob.url, userId });
-            } catch (error) {
-                throw new Error('Could not update user');
-            }
-        },
-        });
-
-        return NextResponse.json(jsonResponse);
+        await writeFile(
+            path.join(process.cwd(), '/public/images', filename),
+            buffer
+        )
+        return NextResponse.json({ Message: "Success", status: 201 })
     } catch (error) {
         return NextResponse.json(
-        { error: (error as Error).message },
-        { status: 400 }, // The webhook will retry 5 times waiting for a 200
-        );
+            { error: "Une erreur est survenue lors de l'enregistrement de l'image" },
+            { status: 500 }
+        )
     }
+};
 
-}

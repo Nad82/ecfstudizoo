@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {animalSchema } from '@/lib/zod'
+import {animalSchema, image_animalSchema } from '@/lib/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SendHorizontal } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
@@ -14,7 +14,7 @@ import { getAllHabitatFromDb } from '@/app/api/habitat/route'
 import { createAnimalInDb } from '@/app/api/animal/route'
 
 
-export default function AnimalformC() {
+export default function AnimalformC () {
 
     const form = useForm<z.infer<typeof animalSchema >>({
         resolver: zodResolver(animalSchema),

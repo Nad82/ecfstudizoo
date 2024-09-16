@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { getAllImageAnimalFromDb } from "@/app/api/image_animal/route";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Undo2 } from "lucide-react";
+import { Plus, Undo2 } from "lucide-react";
 
 
 export default async function adminImageAnimal() {
@@ -20,6 +20,9 @@ export default async function adminImageAnimal() {
                         <CardDescription className="text-lg text-white">
                             L'espace administrateur vous permet de gérer les images des animaux du zoo Arcadia: Créer, modifier ou supprimer les images.
                         </CardDescription>
+                        <Link href="/administrateur/adminImageAnimal/create">
+                            <Button> <Plus />Créer une image</Button>
+                        </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
                         <DataTable columns={columns} data={imageAnimal!} />

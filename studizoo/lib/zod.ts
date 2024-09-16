@@ -1,4 +1,4 @@
-import { boolean, date, number, object, string } from "zod"
+import { boolean, date, number, object, string, z } from "zod"
 
 export const signInSchema = object({
     email: string({ required_error: "L'Email est requis" })
@@ -105,18 +105,18 @@ export const servicesSchema = object ({
         .max(255, "La description doit contenir au maximum 255 caractères")
 })
 
-export const image_animalSchema = object ({
-    blob: string({ required_error: "Le blob est requis" })
+export const image_animalSchema = z.object ({
+    blob: z.string({ required_error: "Le blob est requis" })
         .min(1, "Le blob est requis")
         .max(255, "Le blob doit contenir au maximum 255 caractères"),
-    animalId: number({ required_error: "L'animalId est requis" })
+    animalId: z.number({ required_error: "L'animalId est requis" }),
 })
 
-export const image_habitatSchema = object ({
-    blob: string({ required_error: "Le blob est requis" })
+export const image_habitatSchema = z.object ({
+    blob: z.string({ required_error: "Le blob est requis" })
         .min(1, "Le blob est requis")
         .max(255, "Le blob doit contenir au maximum 255 caractères"),
-    habitatId: number({ required_error: "L'habitatId est requis" })
+    habitatId: z.number({ required_error: "L'habitatId est requis" }),
 })
 
 export const stat_animalSchema = object ({

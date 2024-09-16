@@ -7,13 +7,13 @@ import { NextResponse } from "next/server"
 
 
 export default async function HomeAdmin() {
-    const session = await auth()
+   /* const session = await auth()
     if (session && session?.user?.role !== "administrateur") {
         return NextResponse.json(
             { error: "Vous n'avez pas les droits pour accéder à cette page" },
             { status: 403 }
         )
-    }
+    }*/
 
     return (
                 <div className ="flex min-h-screen w-full flex-col bg-green-800">
