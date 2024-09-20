@@ -3,10 +3,11 @@ import Aproposhome from "@/components/aproposhome";
 import { Habitatshome } from "@/components/habitatshome";
 import { Serviceshome } from "@/components/serviceshome";
 import Videohome from "@/components/videohome";
-import Temoignages from "./temoignages/page";
 import { Formulaireavis } from "@/components/formulaireavis";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { AvisHome } from "@/components/avis-home";
+
 
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
             <br />
             <Habitatshome />
             <br />
-            <Temoignages/>
+            <AvisHome />
             <br />
             <Formulaireavis />
           <Footer/>

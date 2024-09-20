@@ -4,10 +4,10 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'http',
-                hostname: 'localhost',
+                hostname: "localhost",
                 port: '3000',
                 pathname: '/**',
-            }
+            },
         ],
     },
 }

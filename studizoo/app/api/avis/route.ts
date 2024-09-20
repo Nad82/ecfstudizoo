@@ -12,7 +12,7 @@ export async function GET () {
     try{
         const avis = await db.avis.findMany({
         });
-        return avis
+        return NextResponse.json(avis, {status: 200});
     }
     catch (error){
         console.log(`Error at getAvisFromDb: ${error}`)

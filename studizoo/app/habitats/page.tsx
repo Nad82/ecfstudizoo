@@ -8,14 +8,18 @@ import React from 'react'
 
 export default async function Habitatshome() {
 
-    const ImageHabitats = await axios.get('http://localhost:3000/api/image_habitat')
+    const ImageHabitats = await axios.get('http://localhost:3000/api/image_habitat',{
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     .then((res) => {
         return res.data
     })
 
     const data = ImageHabitats.map((image_habitat: any) => ({
         id: image_habitat.id,
-        url: image_habitat.url
+        nom: image_habitat.nom,
     }))
 
     return (
@@ -29,7 +33,7 @@ export default async function Habitatshome() {
             <ul>
                 {data.map((image_habitat: any) => (
                     <li key={image_habitat.id}>
-                        <Image  src={image_habitat.url} alt={image_habitat.habitatId} width={50} height={50} />
+                        <Image  src={`http://localhost/public/images/${image_habitat.nom}`} alt="image habitat zoo" width={50} height={50} />
                         <br />
                     </li>
                 ))}

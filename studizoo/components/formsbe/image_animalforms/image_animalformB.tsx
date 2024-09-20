@@ -6,7 +6,6 @@ import axios from 'axios';
 import Image from 'next/image';
 
 
-
 export default function ImageAnimalformB() {
 
     const inputFileRef = useRef<HTMLInputElement>(null);
@@ -66,7 +65,7 @@ export default function ImageAnimalformB() {
         )}
         {filename && (
             <div>
-                Filename: {filename}
+                Nom du fichier: {filename}
             </div>
         )}
     </>

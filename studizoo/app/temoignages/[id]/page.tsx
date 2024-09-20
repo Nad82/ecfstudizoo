@@ -5,7 +5,7 @@ import axios from "axios"
 
 export default async function Avis ({params} : {params: {id: number}}) {
 
-    const avis = await axios.get('http://localhost:3000/api/avis')
+    const avis = await axios.get('http://localhost:3000/api/avis/' + params.id)
     .then((res) => {
         return res.data
     })
