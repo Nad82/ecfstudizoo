@@ -1,16 +1,19 @@
 "use server"
 
-import { getRoleFromDb } from "@/app/api/role/route"
 import RoleformE from "@/components/formsbe/roleforms/roleformE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import axios from "axios"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
 
 
-export default async function EditRolePage ({params}: {params:{id:number}}) {
+export default async function EditRolePage ({params}: Readonly<{params:{id:number}}>) {
 
-    const role = await getRoleFromDb(Number(params.id))
+    const role = await axios.get(`http://localhost:3000/api/role/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!role) {
         return <div>Erreur lors de la récupération du role</div>
@@ -32,7 +35,7 @@ export default async function EditRolePage ({params}: {params:{id:number}}) {
                     <br />
                     <CardContent className=" text-white text-center">
                         <ul>
-                            <li>nom: {role.nom}</li>
+                            <li>Nom: {role.nom}</li>
                         </ul>
                         <RoleformE params={params}/>
                     </CardContent>

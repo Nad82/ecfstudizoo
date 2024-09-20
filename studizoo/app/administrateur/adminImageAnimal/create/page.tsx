@@ -28,7 +28,7 @@ export default function CreateImageAnimal() {
                     </CardContent>
                     <CardFooter>
                         <Link href="/administrateur/adminImageAnimal">
-                            <Button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" ><Undo2 className="w-6 h-6"/>Retour</Button>
+                            <Button ><Undo2 className="w-6 h-6"/>Retour</Button>
                         </Link>
                     </CardFooter>
                 </Card>

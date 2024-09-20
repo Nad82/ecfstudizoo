@@ -4,13 +4,13 @@ import { horairesSchema } from "@/lib/zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { updateHorairesInDb } from "@/app/api/horaires/route"
+import { updateHorairesInDb } from "@/app/actions/horaires"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 
 
-export default function HorairesFormU ({params} : {params: {id:number}}) { 
+export default function HorairesFormU ({params} : Readonly<{params: {id:number}}>) { 
 
     const form = useForm<z.infer<typeof horairesSchema>>({
         resolver: zodResolver(horairesSchema),

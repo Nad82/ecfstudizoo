@@ -1,16 +1,19 @@
 "use server"
 
-import { getHorairesFromDb } from "@/app/api/horaires/route";
 import HorairesFormU from "@/components/formsbe/horairesforms/horairesformU";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import axios from "axios";
 import { Undo2 } from "lucide-react";
 import Link from "next/link";
 
 
-export default async function EditHorairesPage({params} : {params: {id:number}}){ {
+export default async function EditHorairesPage({params} : Readonly<{params: {id:number}}>){ {
 
-    const horaires = await getHorairesFromDb (Number(params.id))
+    const horaires = await axios.get(`http://localhost:3000/api/horaires/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!horaires) {
         return <div>Erreur lors de la récupération des horaires</div>

@@ -106,16 +106,16 @@ export const servicesSchema = object ({
 })
 
 export const image_animalSchema = z.object ({
-    blob: z.string({ required_error: "Le blob est requis" })
-        .min(1, "Le blob est requis")
-        .max(255, "Le blob doit contenir au maximum 255 caractères"),
+    nom: z.string({ required_error: "Le nom est requis" })
+        .min(1, "Le nom est requis")
+        .max(255, "Le nom doit contenir au maximum 255 caractères"),
     animalId: z.number({ required_error: "L'animalId est requis" }),
 })
 
 export const image_habitatSchema = z.object ({
-    blob: z.string({ required_error: "Le blob est requis" })
-        .min(1, "Le blob est requis")
-        .max(255, "Le blob doit contenir au maximum 255 caractères"),
+    nom: z.string({ required_error: "Le nom est requis" })
+        .min(1, "Le nom est requis")
+        .max(255, "Le nom doit contenir au maximum 255 caractères"),
     habitatId: z.number({ required_error: "L'habitatId est requis" }),
 })
 

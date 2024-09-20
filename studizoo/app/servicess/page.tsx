@@ -1,9 +1,19 @@
+"use client"
+
 import CarrouselServices from '@/components/carrousel-services'
 import Footer from '@/components/footer'
 import Header from '@/components/header'
-import React from 'react'
+import axios from 'axios'
 
-export default function Services() {
+
+export default async function Services() {
+    const services = await axios.get('http://localhost:3000/api/servicess')
+    .then((res) => {
+        return res.data
+    })
+
+    if (!services) return <div>Loading...</div>
+
     return (
         <div>
         <Header />
@@ -23,9 +33,13 @@ export default function Services() {
             </div>
             <br />
             <ul>
-                <li>Restauration</li>
-                <li>Visite des habitats avec un guide</li>
-                <li>Visite du zoo en petit train</li>
+                {services.map((service: any) => (
+                    <li key={service.id}>
+                        <div className='text-2xl text-yellow-400'>{service.nom}</div>
+                        <div className='text-lg text-white'>{service.description}</div>
+                        <br />
+                    </li>
+                ))}
             </ul>
         </div>
         <Footer />

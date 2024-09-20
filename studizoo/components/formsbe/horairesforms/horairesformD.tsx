@@ -1,10 +1,10 @@
 "use client"
 
-import { deleteHorairesInDb } from '@/app/api/horaires/route'
+import { deleteHorairesInDb } from "@/app/actions/horaires"
 import { Button } from '@/components/ui/button'
 
 
-export default function HorairesformD({params} : {params: {id:number}}) {
+export default function HorairesformD({params} : Readonly<{params: {id:number}}>) {
 
     const handleSubmit = () => {
         deleteHorairesInDb(Number(params.id))

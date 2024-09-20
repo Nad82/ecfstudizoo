@@ -4,9 +4,11 @@ import { db} from "@/lib/db";
 import { image_habitatSchema } from "@/lib/zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
-export const getAllImageHabitatFromDb = async () => {
+
+export async function GET() {
     try {
         const imageHabitat = await db.image_habitat.findMany({
             include: {
@@ -17,20 +19,23 @@ export const getAllImageHabitatFromDb = async () => {
                 }
             }
         });
-        return imageHabitat
+        return NextResponse.json(imageHabitat, {
+            status: 200
+        })
     }
     catch (error) {
         console.log(`Error at getAllImageHabitatFromDb: ${error}`)
-        return null
+        return NextResponse.json(
+            { error: "Une erreur est survenue lors de la récupération des images habitat" },
+            { status: 500 }
+        )
     }
 }
 
-export const getImageHabitatFromDb = async (id: number) => {
+export async function POST (imageHabitat:z.infer<typeof image_habitatSchema>) {
     try {
-        const imageHabitat = await db.image_habitat.findFirst({
-            where: {
-                id: id
-            },
+        await db.image_habitat.create({
+            data: imageHabitat,
             include: {
                 habitat: {
                     select: {
@@ -39,59 +44,14 @@ export const getImageHabitatFromDb = async (id: number) => {
                 }
             }
         })
-        return imageHabitat
-    }
-    catch (error) {
-        console.log(`Error at getImageHabitatFromDb: ${error}`)
-        return null
-    }
-}
-
-export const createImageHabitatInDb = async (imageHabitat:z.infer<typeof image_habitatSchema>) => {
-    try {
-        await db.image_habitat.create({
-            data: imageHabitat
-        })
     }
     catch (error) {
         console.log(`Error at createImageHabitatInDb: ${error}`)
-        return { error: "Une erreur est survenue lors de la création de l'image habitat" }
-    }
-    revalidatePath("/administrateur/adminAnimal", 'page');
-    redirect("/administrateur/adminAnimal")
-}
-
-export const updateImageHabitatInDb = async (id: number, imageHabitat:z.infer<typeof image_habitatSchema>) => {
-    try {
-        await db.image_habitat.update({
-            where: {
-                id: id
-            },
-            data: imageHabitat
-            }
+        return NextResponse.json(
+            { error: "Une erreur est survenue lors de la création de l'image habitat" },
+            { status: 500 }
         )
     }
-    catch (error) {
-        console.log(`Error at updateImageHabitatInDb: ${error}`)
-        return { error: "Une erreur est survenue lors de la mise à jour de l'image habitat" }
-    }
-    revalidatePath("/administrateur/adminAnimal", 'page');
-    redirect("/administrateur/adminAnimal")
-}
-
-
-export const deleteImageHabitatInDb = async (id: number) => {
-    try {
-        await db.image_habitat.delete({
-            where: {
-                id: id
-            }
-        })
-    }
-    catch (error) {
-        console.log(`Error at deleteImageHabitatInDb: ${error}`)
-        return { error: "Une erreur est survenue lors de la suppression de l'image habitat" }
-    }
-    revalidatePath("/administrateur/adminAnimal", 'page');
-    redirect("/administrateur/adminAnimal")
+    revalidatePath("/administrateur/adminImageHabitat", 'page');
+    redirect("/administrateur/adminImageHabitat")
 }

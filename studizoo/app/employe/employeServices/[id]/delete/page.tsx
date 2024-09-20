@@ -8,7 +8,7 @@ import Link from "next/link"
 
 
 
-export default async function DeleteServicesEPage({params}: {params:{id: number}}){
+export default async function DeleteServicesEPage({params}: Readonly<{params:{id: number}}>){
     
         return(
             <div className="flex min-h-screen w-full flex-col bg-muted/40">

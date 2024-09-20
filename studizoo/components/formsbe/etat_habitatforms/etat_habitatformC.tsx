@@ -1,7 +1,5 @@
 "use client"
 
-import { createEtatHabitatInDb } from "@/app/api/etat_habitat/route"
-import { getAllHabitatFromDb } from "@/app/api/habitat/route"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Switch } from "@/components/ui/switch"
@@ -13,6 +11,8 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { getAllHabitatFromDb } from "@/app/actions/habitat"
+import { createEtatHabitatInDb } from "@/app/actions/etat_habitat"
 
 
 export default function EtatHabitatFormC(){

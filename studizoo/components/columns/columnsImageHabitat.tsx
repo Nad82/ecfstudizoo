@@ -22,7 +22,7 @@ export const columns: ColumnDef<ImageHabitat>[] = [
     },
     {
         header: "Image",
-        accessorKey: "image",
+        accessorKey: "nom",
     },
     {
         header: 'Habitat',
@@ -51,6 +51,12 @@ export const columns: ColumnDef<ImageHabitat>[] = [
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <Link href={`/administrateur/adminImageHabitat/${imageHabitat.id}`}>
                             <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminImageHabitat/${imageHabitat.id}/edit`}>
+                            <DropdownMenuItem>Modifier</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminImageHabitat/${imageHabitat.id}/delete`}>
+                            <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>
                 </DropdownMenu>

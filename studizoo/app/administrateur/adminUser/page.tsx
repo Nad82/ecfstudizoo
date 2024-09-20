@@ -1,15 +1,19 @@
-import { getAllUserFromDb } from "@/app/api/user/route"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus, Undo2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/columns/columnsEmploye";
+import axios from "axios";
 
 
 
 export default async function AdminUser() {
-    const user = await getAllUserFromDb() 
+    const user = await axios.get("http://localhost:3000/api/user")
+    .then((res) => {
+        return res.data
+    })
 
     return (
         <div className="flex min-h-screen w-full flex-col bg-muted/40">

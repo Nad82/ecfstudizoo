@@ -1,14 +1,20 @@
-import { getUserFromDb } from "@/app/api/user/route"
+"use server"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { NextResponse } from "next/server"
 import UserformE from "@/components/formsbe/userforms/userformE"
 import { Link, Undo2 } from "lucide-react"
+import axios from "axios"
 
 
-export default async function EditUserPage({params} : {params: {id:number}}){
+export default async function EditUserPage({params} : Readonly<{params: {id:number}}>){
 
-    const response = await getUserFromDb (Number(params.id))
+    const response = await axios.get(`http://localhost:3000/api/user/${params.id}`)
+        .then((res) => {
+            return res.data
+        }
+    )
     
         if(response instanceof NextResponse) {
             const jsonResponse = await response.json()

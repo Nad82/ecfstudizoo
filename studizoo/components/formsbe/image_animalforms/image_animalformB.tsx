@@ -10,8 +10,8 @@ import Image from 'next/image';
 export default function ImageAnimalformB() {
 
     const inputFileRef = useRef<HTMLInputElement>(null);
-
     const [blob, setBlob] = useState<{ url: string } | null>(null);
+    const [filename, setFilename] = useState<string>('');
     
     return (
     <>
@@ -29,13 +29,14 @@ export default function ImageAnimalformB() {
                 formData.append('file', file);
 
                 try{
-                    const response = await axios.post('/api/upload', formData, {
+                    const response = await axios.post('api/upload', formData, {
                         headers: {
                             'Content-Type': 'multipart/form-data',
                         },
                     });
-                    console.log(response.data);
+                    console.log(`filename: ${filename}`)
                     setBlob({ url: URL.createObjectURL(file) });
+                    setFilename(response.data.filename);
                 } catch (error) {
                     console.error(error);
                 }
@@ -61,6 +62,11 @@ export default function ImageAnimalformB() {
         {blob && (
             <div>
                 Blob url: <a href={blob.url}>{blob.url}</a>
+            </div>
+        )}
+        {filename && (
+            <div>
+                Filename: {filename}
             </div>
         )}
     </>

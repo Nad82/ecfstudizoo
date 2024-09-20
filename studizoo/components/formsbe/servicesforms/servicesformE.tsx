@@ -1,6 +1,6 @@
 "use client"
 
-import { updateServicesInDb } from "@/app/api/servicess/route"
+import { updateServicesInDb } from "@/app/actions/services"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -12,7 +12,7 @@ import { z } from "zod"
 
 
 
-export default function ServicesFormE ({params} : {params: {id:number}}) { 
+export default function ServicesFormE ({params} : Readonly<{params: {id:number}}>) { 
 
     const form = useForm<z.infer<typeof servicesSchema>>({
         resolver: zodResolver(servicesSchema),

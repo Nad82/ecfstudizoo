@@ -94,7 +94,7 @@ model horaires {
 
 model image_animal {
   id       Int     @id @default(autoincrement())
-  image    Bytes?  @db.Blob
+  nom      String? @db.VarChar(255)
   animalId Int?
   animal   animal? @relation(fields: [animalId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "image_animal_ibfk_1")
 
@@ -104,7 +104,7 @@ model image_animal {
 model image_habitat {
   id        Int      @id @default(autoincrement())
   habitatId Int?
-  image     Bytes?   @db.Blob
+  nom       String?  @db.VarChar(255)
   habitat   habitat? @relation(fields: [habitatId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "image_habitat_ibfk_1")
 
   @@index([habitatId], map: "habitatId")

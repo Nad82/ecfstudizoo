@@ -1,16 +1,19 @@
 "use server"
 
-import { getHabitatFromDb } from "@/app/api/habitat/route"
 import HabitatFormE from "@/components/formsbe/habitatforms/habitatformE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import axios from "axios"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
 
 
-export default async function EditHabitatPage ({params} : {params: {id:number}}){
+export default async function EditHabitatPage ({params} : Readonly<{params: {id:number}}>){
 
-    const habitat = await getHabitatFromDb (Number(params.id))
+    const habitat = await axios.get(`http://localhost:3000/api/habitat/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!habitat) {
         return <div>Erreur lors de la récupération de l'habitat</div>

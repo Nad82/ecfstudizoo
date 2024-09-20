@@ -1,15 +1,22 @@
 
-import { getAllHorairesFromDb } from "@/app/api/horaires/route";
 import { columns } from "@/components/columns/columnsHoraires";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus, Undo2 } from "lucide-react";
+import axios from "axios";
 
 
 export default async function AdminHoraires() {
-    const horaires = await getAllHorairesFromDb();
+    const horaires = axios.get("http://localhost:3000/api/horaires")
+    .then((res) => {
+        return res.data
+    })
+
+    if(!horaires) {
+        return <div>Erreur lors de la récupération des horaires</div>
+    }
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -27,7 +34,7 @@ export default async function AdminHoraires() {
                         </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={horaires!} />
+                        <DataTable columns={columns} data={horaires} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/administrateur">

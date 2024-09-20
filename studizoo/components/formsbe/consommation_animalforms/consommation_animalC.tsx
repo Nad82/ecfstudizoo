@@ -1,6 +1,5 @@
 "use client"
 
-import { createConsommationAnimalInDb } from "@/app/api/consommation_animal/route"
 import { Button } from "@/components/ui/button"
 import { DatetimePicker } from "@/components/ui/date-time-picker"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -15,7 +14,8 @@ import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { getAllAnimalFromDb } from "@/app/api/animal/route"
+import { createConsommationAnimalInDb } from "@/app/actions/consommation_animal"
+import { getAllAnimalFromDb } from "@/app/actions/animal"
 
 
 export default function ConsommationAnimalformC() {

@@ -1,16 +1,19 @@
 "use server"
 
-import { getServicesFromDb } from "@/app/api/servicess/route"
 import ServicesFormE from "@/components/formsbe/servicesforms/servicesformE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
+import axios from "axios"
 
 
-export default async function EditServicesPage({params}: {params:{id: number}}){
+export default async function EditServicesPage({params}: Readonly<{params:{id: number}}>){
 
-    const services = await getServicesFromDb (Number(params.id))
+    const services = await axios.get(`http://localhost:3000/api/servicess/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!services) {
         return <div>Erreur lors de la récupération du service</div>

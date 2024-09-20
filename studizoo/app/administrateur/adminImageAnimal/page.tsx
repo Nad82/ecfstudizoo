@@ -2,14 +2,17 @@
 import { columns } from "@/components/columns/columnsImageAnimal";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllImageAnimalFromDb } from "@/app/api/image_animal/route";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus, Undo2 } from "lucide-react";
+import axios from "axios";
 
 
 export default async function adminImageAnimal() {
-    const imageAnimal = await getAllImageAnimalFromDb();
+    const imageAnimal = await axios.get("http://localhost:3000/api/image_animal")
+    .then((res) => {
+        return res.data
+    })
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -25,7 +28,7 @@ export default async function adminImageAnimal() {
                         </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={imageAnimal!} />
+                        <DataTable columns={columns} data={imageAnimal} />
                     </CardContent>
                     <CardFooter>
                     <Link href="/administrateur">

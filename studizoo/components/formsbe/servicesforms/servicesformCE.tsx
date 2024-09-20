@@ -1,6 +1,6 @@
 "use client"
 
-import { createServicesInDbE } from "@/app/api/servicess/route"
+import { createServicesInDbE } from "@/app/actions/services"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"

@@ -4,12 +4,15 @@ import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getAllConsommationAnimalFromDb } from "@/app/api/consommation_animal/route";
 import { Plus, Undo2 } from "lucide-react";
+import axios from "axios";
 
 
 export default async function EmployeConsommationAnimal() {
-    const consommationAnimal = await getAllConsommationAnimalFromDb();
+    const consommationAnimal = await axios.get("http://localhost:3000/api/consommation_animal")
+    .then((res) => {
+        return res.data
+    })
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -25,7 +28,7 @@ export default async function EmployeConsommationAnimal() {
                         </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={consommationAnimal!} />
+                        <DataTable columns={columns} data={consommationAnimal} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/employe">

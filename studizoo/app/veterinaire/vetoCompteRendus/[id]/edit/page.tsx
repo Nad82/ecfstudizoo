@@ -1,16 +1,19 @@
 "use server"
 
-import { getCompteRenduFromDb } from "@/app/api/compte_rendu/route"
 import CompteRenduFormE from "@/components/formsbe/compte_renduforms/compte_renduformE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import axios from "axios"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
 
 
-export default async function EditCompteRendusPage ({params} : {params: {id:number}}) {
+export default async function EditCompteRendusPage ({params} : Readonly<{params: {id:number}}>) {
 
-    const compte_rendu = await getCompteRenduFromDb (Number(params.id))
+    const compte_rendu = await axios.get(`http://localhost:3000/api/compte_rendu/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!compte_rendu) {
         return <div>Erreur lors de la récupération du compte rendu</div>

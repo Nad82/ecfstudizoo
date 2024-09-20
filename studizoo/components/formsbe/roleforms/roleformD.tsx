@@ -1,10 +1,10 @@
 "use client"
 
-import { deleteRoleInDb } from '@/app/api/role/route'
+import { deleteRoleInDb } from "@/app/actions/role"
 import { Button } from '@/components/ui/button'
 
 
-export default function RoleformD({params} : {params: {id:number}}) {
+export default function RoleformD({params} : Readonly<{params: {id:number}}>) {
 
     const handleSubmit = () => {
         deleteRoleInDb(Number(params.id))

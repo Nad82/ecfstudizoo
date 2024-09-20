@@ -1,15 +1,18 @@
 "use server"
 
-import { getAvisFromDb } from "@/app/api/avis/route";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
+import axios from "axios";
 import { Undo2 } from "lucide-react";
 import Link from "next/link";
 
 
-export default async function AvisPage({params} : {params: {id:number}}) {
-    const avis = await getAvisFromDb(Number(params.id));
+export default async function AvisPage({params} : Readonly<{params: {id:number}}>) {
+    const avis = await axios.get(`http://localhost:3000/api/avis/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!avis) {
         return <div>Erreur lors de la récupération de l'avis</div>

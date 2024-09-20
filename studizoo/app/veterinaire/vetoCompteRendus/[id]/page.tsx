@@ -1,15 +1,18 @@
 "use server"
 
-import { getCompteRenduFromDb } from "@/app/api/compte_rendu/route"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import axios from "axios"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
 
 
-export default async function VetoCompteRendusPage({params}: {params:{id: number}}) {
+export default async function VetoCompteRendusPage({params}: Readonly<{params:{id: number}}>) {
 
-    const compteRendu = await getCompteRenduFromDb (Number(params.id))
+    const compteRendu = await axios.get(`http://localhost:3000/api/compte_rendu/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!compteRendu) {
         return <div>Erreur lors de la récupération du compte-rendu</div>

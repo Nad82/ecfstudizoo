@@ -1,6 +1,5 @@
 "use client"
 
-import { updateEtatHabitatInDb } from "@/app/api/etat_habitat/route"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Switch } from "@/components/ui/switch"
@@ -12,12 +11,13 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useEffect, useState } from "react"
-import { getAllHabitatFromDb } from "@/app/api/habitat/route"
+import { getAllHabitatFromDb } from "@/app/actions/habitat"
+import { updateEtatHabitatInDb } from "@/app/actions/etat_habitat"
 
 
 
-export default function EtatHabitatFormE({params}: {params:{id: number}}) {
 
+export default function EtatHabitatFormE({params} : Readonly<{params: {id:number}}>){
     const form= useForm<z.infer<typeof etat_habitatSchema>>({
         resolver: zodResolver(etat_habitatSchema),
         defaultValues:{

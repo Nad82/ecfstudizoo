@@ -8,14 +8,15 @@ import { writeFile } from "fs/promises";
 export const POST = async (req: NextRequest) => {
     const formData = await req.formData();
 
-    const file = formData.get("file");
+    const file = formData.get("file") as File;
     if (!file || !(file instanceof File)) {
     return NextResponse.json({ error: "Aucun fichier n'a été trouvé" },
         { status: 400 });
     }
     const buffer = Buffer.from(await file.arrayBuffer())
-    const filename = `${new Date().getTime()}_${file.name}`
+    const filename = file.name; 
     console.log(`filename: ${filename}`)
+    
     try {
         await writeFile(
             path.join(process.cwd(), '/public/images', filename),

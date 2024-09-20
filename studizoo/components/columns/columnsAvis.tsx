@@ -6,9 +6,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { MoreHorizontal } from "lucide-react"
 import Link from "next/link"
 import { Switch } from "../ui/switch"
-import { updateAvisInDb } from "@/app/api/avis/route"
 import { avisSchema } from "@/lib/zod"
 import { z } from "zod"
+import { updateAvisInDb } from "@/app/actions/avis"
 
 export type Avis ={
     id: number,

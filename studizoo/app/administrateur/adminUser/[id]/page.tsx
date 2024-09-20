@@ -1,16 +1,19 @@
 "use server"
 
-import { getUserFromDb } from "@/app/api/user/route"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import axios from "axios"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
 import { NextResponse } from "next/server"
 
 
-export default async function UserPage ({params} : {params: {id:number}}) {
+export default async function UserPage ({params} : Readonly<{params: {id:number}}>) {
     
-        const response = await getUserFromDb (Number(params.id))
+        const response = await axios.get(`http://localhost:3000/api/user/${params.id}`)
+        .then((res) => {
+            return res.data
+        })
     
         if(response instanceof NextResponse) {
             const jsonResponse = await response.json()

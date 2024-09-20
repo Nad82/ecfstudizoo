@@ -1,14 +1,18 @@
 import { columns } from "@/components/columns/columnsImageHabitat";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllImageHabitatFromDb } from "@/app/api/image_habitat/route";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Undo2 } from "lucide-react";
+import { Plus, Undo2 } from "lucide-react";
+import axios from "axios";
+
 
 
 export default async function adminImageHabitat() {
-    const imageHabitat = await getAllImageHabitatFromDb();
+    const imageHabitat = await axios.get("http://localhost:3000/api/image_habitat")
+    .then((res) => {
+        return res.data
+    })
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -19,9 +23,12 @@ export default async function adminImageHabitat() {
                         <CardDescription className="text-lg text-white">
                             L'espace administrateur vous permet de gérer les images des habitats du zoo Arcadia: Créer, modifier ou supprimer les images.
                         </CardDescription>
+                        <Link href="/administrateur/adminImageHabitat/create">
+                            <Button><Plus />Créer une image</Button>
+                        </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={imageHabitat!} />
+                        <DataTable columns={columns} data={imageHabitat} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/administrateur">

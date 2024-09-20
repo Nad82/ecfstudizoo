@@ -4,29 +4,31 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { image_animalSchema } from '@/lib/zod';
-import { createImageAnimalInDb } from '@/app/api/image_animal/route';
+import { createImageAnimalInDb } from '@/app/actions/image_animal';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useEffect, useState } from 'react';
-import { getAllAnimalFromDb } from '@/app/api/animal/route';
+import { getAllAnimalFromDb } from '@/app/actions/animal';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { SendHorizontal } from 'lucide-react';
 
 
 export default function ImageAnimalformC() {
     const form = useForm<z.infer<typeof image_animalSchema>>({
         resolver: zodResolver(image_animalSchema),
         defaultValues: {
-            blob:"",
+            nom:"",
             animalId: 1
         }
     })
 
-    const [animals, setAnimals] = useState<{ id: number; prenom: string |null; race:string |null}[] | null>(null);
+    const [animals, setAnimals] = useState<{ id: number; prenom: string | null,  }[] | null>(null)
 
     useEffect(() => {
         async function fetchAnimals() {
             const data = await getAllAnimalFromDb();
-            setAnimals(data);
+                setAnimals(data);
         }
         fetchAnimals();
     }
@@ -41,15 +43,15 @@ export default function ImageAnimalformC() {
             <form onSubmit={form.handleSubmit(handleSubmit)}>
                 <FormField
                     control={form.control}
-                    name="blob"
+                    name="nom"
                     render= {({ field}) => (
                         <FormItem>
-                            <FormLabel className='text-yellow-400'>Blob</FormLabel>
+                            <FormLabel className='text-yellow-400'>Nom</FormLabel>
                             <FormControl>
-                                <Input className="text-black" placeholder="Blob" {...field} />
+                                <Input className="text-black" placeholder="Nom" {...field} />
                             </FormControl>
                             <FormDescription className='text-white'>
-                                Entrez le blob de l'image
+                                Entrez le nom de l'image
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -88,7 +90,12 @@ export default function ImageAnimalformC() {
                         </FormItem>
                     )}
                 />
+                <br />
+                <div className="flex h-full items-center justify-center p-6">
+                    <Button type='submit' className='item-center'><SendHorizontal/>Créer</Button>
+                </div>
             </form>
         </Form>
+
     )
 }

@@ -1,11 +1,28 @@
-import 
-Temoignages from '@/components/temoignageshome'
-import React from 'react'
+"use client"
 
-export default function Temoignagehome() {
+import axios from "axios"
+
+
+export default async function Avis ({params} : {params: {id: number}}) {
+
+    const avis = await axios.get('http://localhost:3000/api/avis')
+    .then((res) => {
+        return res.data
+    })
+
+    if (!avis) return <div>Loading...</div>
+
     return (
-    <div>
-        < Temoignages params={{id: '1'}} />
-    </div>
+        <div>
+            <h1>Avis des visiteurs</h1>
+            <ul>
+                {avis.map((avis: any) => (
+                    <li key={avis.id}>
+                        <div>{avis.nom}</div>
+                        <div>{avis.commentaire}</div>
+                    </li>
+                ))}
+            </ul>
+        </div>
     )
 }

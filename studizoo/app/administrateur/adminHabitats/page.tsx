@@ -4,12 +4,15 @@ import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getAllHabitatFromDb } from "@/app/api/habitat/route";
 import { Plus, Undo2 } from "lucide-react";
+import axios from "axios";
 
 
 export default async function AdminHabitats() {
-    const habitat = await getAllHabitatFromDb();
+    const habitat = await axios.get("http://localhost:3000/api/habitat")
+    .then((res) => {
+        return res.data
+    })
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -25,7 +28,7 @@ export default async function AdminHabitats() {
                         </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={habitat!} />
+                        <DataTable columns={columns} data={habitat} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/administrateur">

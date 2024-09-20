@@ -17,19 +17,19 @@ export default function Aproposhome() {
                     <div className='p-1 box-border md:box-content'>
                         <Card>
                             <CardContent className='flex aspect-square items-center justify-center p-6'>
-                                <Imagepresentation1 />
+                                <Imagepresentation2/>
                             </CardContent>
                         </Card>
-                    </div>             
+                    </div>
                 </CarouselItem>
                 <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                     <div className='p-1 box-border md:box-content'>
                         <Card>
                             <CardContent className='flex aspect-square items-center justify-center p-6'>
-                                <Imagepresentation2/>
+                                <Imagepresentation1 />
                             </CardContent>
                         </Card>
-                    </div>
+                    </div>             
                 </CarouselItem>
                 <CarouselItem className="md:basis-1/2 lg:basis-1/3">
                     <div className='p-1 box-border md:box-content'>

@@ -1,7 +1,7 @@
 "use client"
 
-import { getAllAnimalFromDb } from "@/app/api/animal/route"
-import { updateCompteRenduInDb } from "@/app/api/compte_rendu/route"
+import { getAllAnimalFromDb } from "@/app/actions/animal"
+import { updateCompteRenduInDb } from "@/app/actions/compte_rendu"
 import { Button } from "@/components/ui/button"
 import { DatetimePicker } from "@/components/ui/date-time-picker"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 
-export default function CompteRenduFormE({params} : {params: {id:number}}){
+export default function CompteRenduFormE({params} : Readonly<{params: {id:number}}>){
 
     const form = useForm<z.infer<typeof compte_renduSchema>>({
         resolver: zodResolver(compte_renduSchema),
@@ -123,7 +123,6 @@ export default function CompteRenduFormE({params} : {params: {id:number}}){
                                 <DatetimePicker
                                 selected={date}
                                 setDate={setDate}
-                                initialFocus
                             />
                             </PopoverContent>
                         </Popover>

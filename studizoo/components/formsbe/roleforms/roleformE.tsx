@@ -1,6 +1,6 @@
 "use client"
 
-import { updateRoleInDb } from "@/app/api/role/route"
+import { updateRoleInDb } from "@/app/actions/role"
 import { roleSchema } from "@/lib/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 
-export default function RoleformE({params} : {params: {id:number}}) {
+export default function RoleformE({params} : Readonly<{params: {id:number}}>) {
 
     const form = useForm<z.infer<typeof roleSchema>>({
         resolver: zodResolver(roleSchema),

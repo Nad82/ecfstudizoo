@@ -1,16 +1,19 @@
 "use server"
 
-import { getAnimalFromDb } from "@/app/api/animal/route"
 import AnimalformE from "@/components/formsbe/animalforms/animalformE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
+import axios from "axios"
 
 
 export default async function EditAnimalPage({params} : {params: {id:number}}){ {
 
-    const animal = await getAnimalFromDb (Number(params.id))
+    const animal = await axios.get(`http://localhost:3000/api/animal/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!animal) {
         return <div>Erreur lors de la récupération de l'animal</div>
@@ -35,7 +38,7 @@ export default async function EditAnimalPage({params} : {params: {id:number}}){ 
                             <li>Race: {animal.race}</li>
                             <li>Image: 
                                 <ul>
-                                    {animal.image_animal?.map((image, index) => (
+                                    {animal.image_animal?.map((image: {image: string}, index: number) => (
                                             <li key={index}>{image.image}</li>
                                     ))?? 'Pas d\'image'}
                                 </ul>

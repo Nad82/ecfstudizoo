@@ -1,10 +1,10 @@
 "use client"
 
-import { deleteServicesInDb } from "@/app/api/servicess/route"
+import { deleteServicesInDb } from "@/app/actions/services"
 import { Button } from "@/components/ui/button"
 
 
-export default function ServicesformD({params} : {params: {id:number}}) {
+export default function ServicesformD({params} : Readonly<{params: {id:number}}>) {
 
     const handleSubmit = () => {
         deleteServicesInDb(Number(params.id))

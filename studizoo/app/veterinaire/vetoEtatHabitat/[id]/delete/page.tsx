@@ -7,7 +7,7 @@ import { Undo2 } from "lucide-react"
 import Link from "next/link"
 
 
-export default async function DeleteEtatHabitatPage ({params}: {params:{id: number}}) {
+export default async function DeleteEtatHabitatPage ({params}: Readonly<{params:{id: number}}>) {
 
     return(
         <div className="flex min-h-screen w-full flex-col bg-muted/40">

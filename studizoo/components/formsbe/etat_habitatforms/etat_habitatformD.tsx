@@ -1,10 +1,10 @@
 "use client"
 
-import { deleteEtatHabitatInDb } from "@/app/api/etat_habitat/route"
+import { deleteEtatHabitatInDb } from "@/app/actions/etat_habitat"
 import { Button } from "@/components/ui/button"
 
 
-export default function EtatHabitatFormD({params} : {params: {id:number}}) {
+export default function EtatHabitatFormD({params} : Readonly<{params: {id:number}}>) {
     
         const handleSubmit = () => {
             deleteEtatHabitatInDb(Number(params.id))

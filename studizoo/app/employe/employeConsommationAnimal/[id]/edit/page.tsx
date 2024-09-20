@@ -1,16 +1,20 @@
 "use server"
 
-import { getConsommationAnimalFromDb } from "@/app/api/consommation_animal/route"
 import ConsommationAnimalformE from "@/components/formsbe/consommation_animalforms/consommation_animalE"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import axios from "axios"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
 
 
-export default async function EditEmployeConsommationAnimalPage ({params} : {params: {id:number}}) {
+export default async function EditEmployeConsommationAnimalPage ({params} : Readonly<{params: {id:number}}>) {
     
-    const consommation_animal = await getConsommationAnimalFromDb (Number(params.id))
+    const consommation_animal = await axios.get(`http://localhost:3000/api/consommation_animal/${params.id}`)
+    .then((res) => {
+        return res.data
+    }
+    )
     
         if(!consommation_animal) {
             return <div>Erreur lors de la récupération de la consommation de l'animal</div>

@@ -1,14 +1,28 @@
+
+
 import { columns } from "@/components/columns/columnsAvis";
 import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllAvisFromDb } from "@/app/api/avis/route";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Undo2 } from "lucide-react";
+import axios from "axios";
+
 
 
 export default async function EmployeAvis() {
-    const avis = await getAllAvisFromDb();
+
+    const avis = await axios.get("http://localhost:3000/api/avis")
+    .then(res => {
+        return res.data
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
+    if(!avis) {
+        return <div>Erreur lors de la récupération des avis</div>
+    }
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -21,7 +35,7 @@ export default async function EmployeAvis() {
                         </CardDescription>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={avis!} />
+                        <DataTable columns={columns} data={avis} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/employe">

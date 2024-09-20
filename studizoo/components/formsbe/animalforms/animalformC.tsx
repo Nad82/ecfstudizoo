@@ -3,15 +3,16 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {animalSchema, image_animalSchema } from '@/lib/zod'
+import {animalSchema} from '@/lib/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SendHorizontal } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { getAllHabitatFromDb } from '@/app/api/habitat/route'
-import { createAnimalInDb } from '@/app/api/animal/route'
+import { getAllHabitatFromDb } from '@/app/actions/habitat'
+import { createAnimalInDb } from '@/app/actions/animal'
+
 
 
 export default function AnimalformC () {

@@ -1,6 +1,6 @@
 "use client"
 
-import { updateHabitatInDb } from "@/app/api/habitat/route"
+import { updateHabitatInDb } from "@/app/actions/habitat"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -12,7 +12,7 @@ import { z } from "zod"
 
 
 
-export default function HabitatFormE({params} : {params: {id:number}}){
+export default function HabitatFormE({params} : Readonly<{params: {id:number}}>){
 
     const form = useForm<z.infer<typeof habitatSchema>>({
         resolver: zodResolver(habitatSchema),

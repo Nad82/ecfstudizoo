@@ -5,11 +5,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus, Undo2 } from "lucide-react";
-import { getAllAnimalFromDb } from "@/app/api/animal/route";
+import axios from "axios";
 
 
 export default async function AdminAnimal() {
-    const animal = await getAllAnimalFromDb();
+    const animal = await axios.get("http://localhost:3000/api/animal")
+    .then((res) => {
+        return res.data
+    })
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">

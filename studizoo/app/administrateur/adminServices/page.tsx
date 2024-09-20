@@ -4,12 +4,15 @@ import { DataTable } from "@/components/data-table";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getAllServicesFromDb } from "@/app/api/servicess/route";
 import { Plus, Undo2 } from "lucide-react";
+import axios from "axios";
 
 
 export default async function AdminServices() {
-    const services = await getAllServicesFromDb();
+    const services = await axios.get("http://localhost:3000/api/servicess")
+    .then((res) => {
+        return res.data
+    })
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -27,7 +30,7 @@ export default async function AdminServices() {
                         </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={services!} />
+                        <DataTable columns={columns} data={services} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/administrateur">

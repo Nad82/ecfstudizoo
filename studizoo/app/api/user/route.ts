@@ -11,7 +11,7 @@ import { NextResponse } from "next/server";
 
 
 
-export const getAllUserFromDb = async () => {
+export async function GET() {
     try {
 
         const session = await auth()
@@ -22,9 +22,11 @@ export const getAllUserFromDb = async () => {
             )
         }
         const user = await db.user.findMany();
-        return user
+        return NextResponse.json(user, {
+            status: 200
+        })
     } catch (error) {
-        console.log(`Error at getAllUserFromDb: ${error}`)
+        console.log(`Error at GET: ${error}`)
         return NextResponse.json(
             { error: "Une erreur est survenue lors de la récupération des utilisateurs" },
             { status: 500}
@@ -32,31 +34,7 @@ export const getAllUserFromDb = async () => {
     }
 }
 
-export const getUserFromDb = async (id: number) => {
-    try {
-        const session = await auth()
-        if (session && session?.user?.role !== "administrateur") {
-            return NextResponse.json(
-                { error: "Vous n'avez pas les droits pour effectuer cette action" },
-                { status: 403}
-            )
-        }
-        const user = await db.user.findUnique({
-            where: {
-                id: id
-            }
-        })
-        return user
-    } catch (error) {
-        console.log(`Error at getUserFromDb: ${error}`)
-        return NextResponse.json(
-            { error: "Une erreur est survenue lors de la récupération de l'utilisateur" },
-            { status: 500}
-        )
-    }
-}
-
-export const createUserInDb = async (user: z.infer<typeof userSchema>) => {
+export async function POST (user: z.infer<typeof userSchema>) {
     try {
         const session = await auth()
         if (session && session?.user?.role !== "administrateur") {
@@ -88,62 +66,5 @@ export const createUserInDb = async (user: z.infer<typeof userSchema>) => {
         )
     }
     revalidatePath("/administrateur/adminUser", 'page');
-    redirect("/administrateur/adminUser")
-}
-
-export const updateUserInDb = async (id: number,user:z.infer<typeof userSchema>) => {
-    try {
-        const session = await auth()
-        if (session && session?.user?.role !== "administrateur") {
-            return NextResponse.json(
-                { error: "Vous n'avez pas les droits pour effectuer cette action" },
-                { status: 403}
-            )
-        }
-        const hashedPassword = await bcrypt.hash(user.password, 10)
-        await db.user.update({
-            where: {
-                id: id
-            },
-            data: {
-                ...user,
-                password: hashedPassword
-            }
-        })
-    }
-    catch (error) {
-        console.log(`Error at updateUserInDb: ${error}`)
-        return NextResponse.json(
-            { error: "Une erreur est survenue lors de la modification de l'utilisateur" },
-            { status: 500 }
-        )
-    }
-    revalidatePath  ("/administrateur/adminUser",'page');
-    redirect("/administrateur/adminUser")
-}
-
-export const deleteUserInDb = async (id: number) => {
-    try{    
-        const session = await auth()
-        if (session && session?.user?.role !== "administrateur") {
-            return NextResponse.json(
-                { error: "Vous n'avez pas les droits pour effectuer cette action" },
-                { status: 403}
-            )
-        }
-        await db.user.delete({
-            where: {
-                id: id
-            }
-        })
-    }
-    catch (error){
-        console.log(`Error at deleteUserInDb: ${error}`)
-        return NextResponse.json(
-            { error: "Une erreur est survenue lors de la suppression de l'utilisateur" },
-            {status: 500}
-        )
-    }
-    revalidatePath  ("/administrateur/adminUser",'page');
     redirect("/administrateur/adminUser")
 }

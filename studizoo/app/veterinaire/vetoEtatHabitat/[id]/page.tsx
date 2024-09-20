@@ -1,17 +1,20 @@
 "use server"
 
-import { getEtatHabitatFromDb } from "@/app/api/etat_habitat/route"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Switch } from "@/components/ui/switch"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
+import axios from "axios"
 
 
 
-export default async function EtatHabitatPage({params}: {params:{id: number}}) {
+export default async function EtatHabitatPage({params}: Readonly<{params:{id: number}}>) {
 
-    const etat_habitat = await getEtatHabitatFromDb(Number(params.id))
+    const etat_habitat = await axios.get(`http://localhost:3000/api/etat_habitat/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!etat_habitat) {
         return <div>Erreur lors de la récupération de l'état de l'habitat</div>

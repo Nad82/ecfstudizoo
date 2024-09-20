@@ -22,7 +22,7 @@ export const columns: ColumnDef<ImageAnimal>[] = [
     },
     {
         header: "Image",
-        accessorKey: "image",
+        accessorKey: "nom",
     },
     {
         header: 'Animal',
@@ -30,7 +30,7 @@ export const columns: ColumnDef<ImageAnimal>[] = [
         cell: ({row}) => {
             const imageAnimal = row.original
             return (
-                <span>{imageAnimal.animal?.prenom ? `Animal ${imageAnimal.animal.prenom}` : 'Pas d\'animal'}</span>
+                <span>{imageAnimal.animal?.prenom ? ` ${imageAnimal.animal.prenom}` : 'Pas d\'animal'}</span>
             )
         }
     },
@@ -51,6 +51,12 @@ export const columns: ColumnDef<ImageAnimal>[] = [
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <Link href={`/administrateur/adminImageAnimal/${imageAnimal.id}`}>
                             <DropdownMenuItem>Détails</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminImageAnimal/${imageAnimal.id}/edit`}>
+                            <DropdownMenuItem>Modifier</DropdownMenuItem>
+                        </Link>
+                        <Link href={`/administrateur/adminImageAnimal/${imageAnimal.id}/delete`}>
+                            <DropdownMenuItem>Supprimer</DropdownMenuItem>
                         </Link>
                     </DropdownMenuContent>
                 </DropdownMenu>

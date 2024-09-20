@@ -4,9 +4,11 @@ import { db } from "@/lib/db";
 import { habitatSchema } from "@/lib/zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 
-export const getAllHabitatFromDb = async () => {
+
+export async function GET() {
     try{
         const habitat = await db.habitat.findMany({
             include: {
@@ -17,7 +19,7 @@ export const getAllHabitatFromDb = async () => {
                 },
                 image_habitat: {
                     select: {
-                        image: true
+                        nom: true
                 }},
                 animal: {
                     select: {
@@ -26,104 +28,38 @@ export const getAllHabitatFromDb = async () => {
                 }
             }
         });
-        return habitat
-    }
-    catch (error){
-        console.log(`Error at getHabitatFromDb: ${error}`)
-        return null
-    }
-}
-
-export const getHabitatFromDb = async (id: number) => {
-    try{
-        const habitat = await db.habitat.findFirst({
-            where: {
-                id: id
-            },
-            include: {
-                etat_habitat: {
-                    select: {
-                        id: true
-                    }
-                },
-                image_habitat: {
-                    select: {
-                        image: true
-                }},
-                animal: {
-                    select: {
-                        prenom: true
-                    }
-            }}
+        return NextResponse.json(habitat, {
+            status: 200
         })
-        return habitat
     }
     catch (error){
         console.log(`Error at getHabitatFromDb: ${error}`)
-        return null
+        return NextResponse.json(
+            { error: "Une erreur est survenue lors de la récupération de l'habitat" },
+            { status: 500}
+        )
     }
 }
 
-export const createHabitatInDb = async (habitat:z.infer<typeof habitatSchema>) => {
+
+export async function POST (habitat:z.infer<typeof habitatSchema>) {
     try{
         await db.habitat.create({
             data: habitat,
             include: {
                 image_habitat: {
                     select: {
-                        image: true
+                        nom: true
                 }}
             }
         })
     }
     catch (error){
         console.log(`Error at createHabitatInDb: ${error}`)
-        return {error:"Une erreur est survenue lors de la création de l'habitat"}
-    }
-    revalidatePath("/administrateur/adminHabitats",'page');
-    redirect("/administrateur/adminHabitats")
-}
-
-export const updateHabitatInDb = async (id: number,habitat:z.infer<typeof habitatSchema>) => {
-    try{
-        await db.habitat.update({
-            where: {
-                id: id
-            },
-            data: habitat,
-            include: {
-                image_habitat: {
-                    select: {
-                        image: true
-                }}
-            }
-        })
-    }
-    catch (error){
-        console.log(`Error at updateHabitatInDb: ${error}`)
-        return {error:"Une erreur est survenue lors de la mise à jour de l'habitat"}
-    }
-    revalidatePath("/administrateur/adminHabitats",'page');
-    redirect("/administrateur/adminHabitats")
-}
-
-export const deleteHabitatInDb = async (id: number) => {
-    try{
-        await db.habitat.delete({
-            where: {
-                id: id
-            },
-            include: {
-                image_habitat: {
-                    select: {
-                        image: true
-                }}
-            }
-        })
-    }
-    catch (error){
-        console.log(`Error at deleteHabitatInDb: ${error}`)
-        return {error:"Une erreur est survenue lors de la suppression de l'habitat"}
+        return NextResponse.json(
+            { error: "Une erreur est survenue lors de la création de l'habitat" },
+            { status: 500}
+        )
     }
     revalidatePath("/administrateur/adminHabitats",'page');
     redirect("/administrateur/adminHabitats")

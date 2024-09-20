@@ -10,10 +10,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form, FormControl, FormField, FormLabel, FormItem, FormMessage, FormDescription } from './ui/form'
 import { Textarea } from './ui/textarea'
 import { Card, CardDescription, CardHeader, CardTitle } from './ui/card'
+import { createAvisInDb } from '@/app/actions/avis'
 
 const formSchema = z.object({
     pseudo: z.string().min(3, "Le pseudo doit contenir au moins 3 caractères").max(20, "Le pseudo doit contenir au maximum 20 caractères"),
     commentaires: z.string().min(10, "Les commentaires doivent contenir au moins 10 caractères").max(200, "Les commentaires doivent contenir au maximum 200 caractères"),
+    published: z.boolean(),
 })
 
 export function Formulaireavis() {
@@ -23,11 +25,16 @@ export function Formulaireavis() {
         defaultValues: {
             pseudo: '',
             commentaires: '',
+            published: false,
         },
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log (values)
+    const handleSubmit = (data: z.infer<typeof formSchema>) => {
+        const avis= {
+            ...data,
+            published : false,
+        }
+        createAvisInDb(avis)
     }
 
     return (
@@ -38,7 +45,7 @@ export function Formulaireavis() {
                 <CardDescription className="text-lg text-white text-center">De même que vous avez pu lire les commentaires de nos visiteurs, n'hésitez pas à laisser le votre!!</CardDescription>
             </CardHeader>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+                <form onSubmit={form.handleSubmit(handleSubmit)} className='space-y-8'>
                     <FormField
                     control={form.control}
                     name='pseudo'
@@ -46,7 +53,7 @@ export function Formulaireavis() {
                         <FormItem>
                         <FormLabel className='text-yellow-400'>Pseudo</FormLabel>
                         <FormControl>
-                            <Input placeholder='Votre pseudo' {...field} required/>
+                            <Input placeholder='Votre pseudo' {...field} />
                         </FormControl>
                         <FormDescription className='text-white'>
                             Entrez votre pseudo
@@ -62,7 +69,7 @@ export function Formulaireavis() {
                         <FormItem>
                             <FormLabel className='text-yellow-400'>Commentaires</FormLabel>
                             <FormControl>
-                                <Textarea placeholder='Vos commentaires' {...field} required/>
+                                <Textarea placeholder='Vos commentaires' {...field} />
                             </FormControl>
                             <FormDescription className='text-white'>
                                 Entrez vos commentaires

@@ -1,16 +1,19 @@
 "use server"
 
-import { getHabitatFromDb } from "@/app/api/habitat/route"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import axios from "axios"
 import { Undo2 } from "lucide-react"
 import Link from "next/link"
 
 
 
-export default async function HabitatPage ({params} : {params: {id:number}}){
+export default async function HabitatPage ({params} : Readonly<{params: {id:number}}>){
 
-    const habitat = await getHabitatFromDb (Number(params.id))
+    const habitat = await axios.get(`http://localhost:3000/api/habitat/${params.id}`)
+    .then((res) => {
+        return res.data
+    })
 
     if(!habitat) {
         return <div>Erreur lors de la récupération de l'habitat</div>
@@ -35,8 +38,8 @@ export default async function HabitatPage ({params} : {params: {id:number}}){
                             <li>Description: {habitat.description?? 'Description non disponible'}</li>
                             <li>Animaux:
                                 <ul>
-                                    {habitat.animal?.map((animal,index) => (
-                                        <li key={index}>{animal.prenom??'Prénom non disponible'}</li>
+                                    {habitat.animal?.map((animal: {prenom: string}, id:number) => (
+                                        <li key={id}>{animal.prenom??'Prénom non disponible'}</li>
                                     ))??'Pas d\'animaux dans cet habitat'}
                                 </ul> 
                             </li>

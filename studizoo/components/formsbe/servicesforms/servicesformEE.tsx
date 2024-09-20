@@ -1,6 +1,6 @@
 "use client"
 
-import { updateServicesInDbE } from "@/app/api/servicess/route"
+import { updateServicesInDbE } from "@/app/actions/services"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 
-export default function ServicesFormEE ({params} : {params: {id:number}}) { 
+export default function ServicesFormEE ({params} : Readonly<{params: {id:number}}>) { 
 
     const form = useForm<z.infer<typeof servicesSchema>>({
         resolver: zodResolver(servicesSchema),

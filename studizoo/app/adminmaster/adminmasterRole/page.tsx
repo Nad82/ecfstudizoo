@@ -1,14 +1,18 @@
-import { getAllRoleFromDb } from "@/app/api/role/route";
+
 import { columns } from "@/components/columns/columnsRole";
 import { DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import axios from "axios";
 import { Undo2, Plus } from "lucide-react";
 import Link from "next/link";
 
 
 export default async function AdminMasterRole() {
-    const role = await getAllRoleFromDb();
+    const role = await axios.get('http://localhost:3000/api/role')
+        .then((res) => {
+            return res.data
+        })
 
     return (
         <div className ="flex min-h-screen w-full flex-col bg-muted/40">
@@ -26,7 +30,7 @@ export default async function AdminMasterRole() {
                         </Link>
                     </CardHeader>
                     <CardContent className=" text-white">
-                        <DataTable columns={columns} data={role!} />
+                        <DataTable columns={columns} data={role} />
                     </CardContent>
                     <CardFooter>
                         <Link href="/adminmaster">

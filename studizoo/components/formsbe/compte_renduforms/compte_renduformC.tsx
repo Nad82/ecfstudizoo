@@ -1,7 +1,7 @@
 "use client"
 
-import { getAllAnimalFromDb } from "@/app/api/animal/route"
-import { createCompteRenduInDb } from "@/app/api/compte_rendu/route"
+import { getAllAnimalFromDb } from "@/app/actions/animal"
+import { createCompteRenduInDb } from "@/app/actions/compte_rendu"
 import { Button } from "@/components/ui/button"
 import { DatetimePicker } from "@/components/ui/date-time-picker"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"

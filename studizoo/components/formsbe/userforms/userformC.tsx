@@ -1,6 +1,6 @@
 "use client"
 
-import { createUserInDb } from '@/app/api/user/route'
+import { createUserInDb } from '@/app/actions/user'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -8,7 +8,7 @@ import {userSchema } from '@/lib/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { getAllRoleFromDb } from '@/app/api/role/route'
+import { getAllRoleFromDb } from '@/app/actions/role'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { format } from 'date-fns'
 import { DatetimePicker } from '@/components/ui/date-time-picker'
